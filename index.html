@@ -1,534 +1,1865 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Maîtrise des Articles Français - B1</title>
-    
-    <!-- Import Map pour la gestion des modules sans build -->
-    <script type="importmap">
-{
-  "imports": {
-    "react": "https://esm.sh/react@19.0.0",
-    "react-dom/client": "https://esm.sh/react-dom@19.0.0/client",
-    "lucide-react": "https://esm.sh/lucide-react@0.469.0?external=react",
-    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
-    "react/": "https://esm.sh/react@^19.2.3/"
-  }
-}
-</script>
-
-    <!-- Tailwind CSS Play CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            fontFamily: {
-              sans: ['Quicksand', 'sans-serif'],
-            },
-            colors: {
-              brand: {
-                50: '#f0f7ff',
-                100: '#e0effe',
-                500: '#3b82f6',
-                600: '#2563eb',
-                700: '#1d4ed8',
-              }
-            }
-          }
-        }
-      }
-    </script>
-
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
-
-    <!-- Babel Standalone pour la transpilation runtime du JSX -->
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-
+    <title>L'Arte della Contabilità - Vente de Voiture (TVA 50%)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
     <style>
-        body {
-            background-color: #f0f7ff;
-            font-family: 'Quicksand', sans-serif;
+        :root {
+            --gold: #c9a227;
+            --gold-light: #e8d5a3;
+            --gold-dark: #8b7355;
+            --parchment: #f4e4bc;
+            --parchment-dark: #d4c4a8;
+            --ink: #2c1810;
+            --ink-light: #5c4033;
+            --sepia: #704214;
+            --red-ink: #8b0000;
+            --green-ink: #006400;
+            --blue-ink: #00008b;
+            --purple-ink: #4b0082;
+            --shadow: rgba(44, 24, 16, 0.3);
         }
-        .fade-in { animation: fadeIn 0.4s ease-out; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'EB Garamond', serif;
+            background: linear-gradient(135deg, #d4c4a8 0%, #f4e4bc 50%, #d4c4a8 100%);
+            min-height: 100vh;
+            color: var(--ink);
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.08'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Header Style Renaissance */
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            background: linear-gradient(180deg, rgba(201, 162, 39, 0.1) 0%, transparent 100%);
+            border-bottom: 3px double var(--gold);
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        header::before, header::after {
+            content: '🚗';
+            font-size: 24px;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        header::before { left: 20px; }
+        header::after { right: 20px; }
+
+        .main-title {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            color: var(--sepia);
+            text-shadow: 2px 2px 4px var(--shadow);
+            letter-spacing: 0.1em;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 1.3rem;
+            color: var(--ink-light);
+            letter-spacing: 0.05em;
+        }
+
+        .special-badge {
+            display: inline-block;
+            background: linear-gradient(180deg, var(--purple-ink) 0%, #2d0047 100%);
+            color: #fff;
+            padding: 8px 25px;
+            font-family: 'Cinzel', serif;
+            font-size: 1rem;
+            margin-top: 15px;
+            border-radius: 3px;
+            box-shadow: 0 3px 10px var(--shadow);
+        }
+
+        .da-vinci-quote {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 1rem;
+            color: var(--gold-dark);
+            margin-top: 15px;
+            padding: 10px 30px;
+            border-left: 2px solid var(--gold);
+            border-right: 2px solid var(--gold);
+            display: inline-block;
+        }
+
+        /* Special TVA Alert Box */
+        .tva-special-box {
+            background: linear-gradient(135deg, rgba(75, 0, 130, 0.1) 0%, rgba(75, 0, 130, 0.2) 100%);
+            border: 3px solid var(--purple-ink);
+            border-radius: 10px;
+            padding: 25px;
+            margin: 20px 0;
+            position: relative;
+        }
+
+        .tva-special-box::before {
+            content: '⚠️ RÈGLE SPÉCIALE TVA - VOITURE';
+            position: absolute;
+            top: -15px;
+            left: 20px;
+            background: var(--purple-ink);
+            color: #fff;
+            padding: 5px 20px;
+            font-family: 'Cinzel', serif;
+            font-size: 0.9rem;
+            border-radius: 3px;
+        }
+
+        .tva-special-box h3 {
+            font-family: 'Cinzel', serif;
+            color: var(--purple-ink);
+            margin-bottom: 15px;
+            margin-top: 10px;
+        }
+
+        .tva-rule {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+            margin: 10px 0;
+            background: rgba(255, 255, 255, 0.7);
+            border-left: 4px solid var(--purple-ink);
+        }
+
+        .tva-rule-icon {
+            font-size: 2rem;
+        }
+
+        .tva-rule-content {
+            flex: 1;
+        }
+
+        .tva-rule-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.1rem;
+            color: var(--purple-ink);
+            margin-bottom: 5px;
+        }
+
+        .tva-formula {
+            background: var(--purple-ink);
+            color: #fff;
+            padding: 10px 20px;
+            display: inline-block;
+            font-family: 'EB Garamond', serif;
+            font-size: 1.2rem;
+            margin-top: 10px;
+            border-radius: 3px;
+        }
+
+        /* Navigation Niveaux */
+        .nav-levels {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: linear-gradient(90deg, transparent 0%, rgba(201, 162, 39, 0.1) 50%, transparent 100%);
+        }
+
+        .nav-btn {
+            font-family: 'Cinzel', serif;
+            font-size: 1rem;
+            padding: 15px 30px;
+            border: 2px solid var(--gold);
+            background: linear-gradient(180deg, var(--parchment) 0%, var(--parchment-dark) 100%);
+            color: var(--sepia);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(201, 162, 39, 0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .nav-btn:hover::before {
+            left: 100%;
+        }
+
+        .nav-btn:hover, .nav-btn.active {
+            background: linear-gradient(180deg, var(--gold-light) 0%, var(--gold) 100%);
+            color: var(--ink);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px var(--shadow);
+        }
+
+        .nav-btn.active {
+            border-width: 3px;
+        }
+
+        /* Panels */
+        .level-panel {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .level-panel.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Cards Style Parchemin */
+        .card {
+            background: linear-gradient(135deg, #f9f3e3 0%, var(--parchment) 50%, #f9f3e3 100%);
+            border: 2px solid var(--gold-dark);
+            border-radius: 5px;
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: 
+                0 5px 20px var(--shadow),
+                inset 0 0 50px rgba(201, 162, 39, 0.05);
+            position: relative;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            bottom: 10px;
+            border: 1px solid var(--gold-light);
+            pointer-events: none;
+        }
+
+        .card-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
+            color: var(--sepia);
+            border-bottom: 2px solid var(--gold);
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .card-title .icon {
+            font-size: 1.8rem;
+        }
+
+        /* Tables Renaissance */
+        .table-container {
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 1rem;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border: 1px solid var(--gold-dark);
+        }
+
+        th {
+            background: linear-gradient(180deg, var(--gold-light) 0%, var(--gold) 100%);
+            font-family: 'Cinzel', serif;
+            font-weight: 600;
+            color: var(--ink);
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 0.05em;
+        }
+
+        td {
+            background: rgba(255, 255, 255, 0.5);
+        }
+
+        tr:nth-child(even) td {
+            background: rgba(201, 162, 39, 0.1);
+        }
+
+        .amount {
+            font-family: 'EB Garamond', serif;
+            font-weight: 600;
+            text-align: right;
+        }
+
+        .debit { color: var(--red-ink); }
+        .credit { color: var(--green-ink); }
+        .special { color: var(--purple-ink); font-weight: bold; }
+
+        /* Facture Style */
+        .invoice {
+            background: #fff;
+            border: 3px double var(--gold);
+            padding: 40px;
+            margin: 20px 0;
+            position: relative;
+        }
+
+        .invoice::before {
+            content: 'FACTURE';
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--parchment);
+            padding: 5px 30px;
+            font-family: 'Cinzel', serif;
+            font-size: 1.2rem;
+            color: var(--sepia);
+            border: 2px solid var(--gold);
+        }
+
+        .invoice-header {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--gold-light);
+        }
+
+        .invoice-company {
+            font-family: 'Cinzel', serif;
+            font-size: 1.3rem;
+            color: var(--sepia);
+            margin-bottom: 10px;
+        }
+
+        .invoice-details {
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .invoice-number {
+            text-align: right;
+            font-family: 'Cinzel', serif;
+        }
+
+        .invoice-total {
+            background: linear-gradient(180deg, var(--gold-light) 0%, var(--gold) 100%);
+            padding: 20px;
+            text-align: right;
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
+            color: var(--ink);
+            margin-top: 20px;
+        }
+
+        /* Input Fields */
+        .input-group {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin: 15px 0;
+            flex-wrap: wrap;
+        }
+
+        .input-group label {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            min-width: 250px;
+            color: var(--ink-light);
+        }
+
+        .input-field {
+            flex: 1;
+            min-width: 150px;
+            padding: 12px 15px;
+            border: 2px solid var(--gold-dark);
+            background: rgba(255, 255, 255, 0.8);
+            font-family: 'EB Garamond', serif;
+            font-size: 1.1rem;
+            color: var(--ink);
+            transition: all 0.3s ease;
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: var(--gold);
+            box-shadow: 0 0 10px rgba(201, 162, 39, 0.3);
+            background: #fff;
+        }
+
+        .input-field.correct {
+            border-color: var(--green-ink);
+            background: rgba(0, 100, 0, 0.05);
+        }
+
+        .input-field.incorrect {
+            border-color: var(--red-ink);
+            background: rgba(139, 0, 0, 0.05);
+        }
+
+        .input-field.special-input {
+            border-color: var(--purple-ink);
+            background: rgba(75, 0, 130, 0.05);
+        }
+
+        .unit {
+            font-family: 'EB Garamond', serif;
+            font-size: 1.1rem;
+            color: var(--ink-light);
+        }
+
+        /* Buttons */
+        .btn {
+            font-family: 'Cinzel', serif;
+            padding: 12px 30px;
+            border: 2px solid var(--gold);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            margin: 10px 5px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(180deg, var(--gold-light) 0%, var(--gold) 100%);
+            color: var(--ink);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px var(--shadow);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--sepia);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(201, 162, 39, 0.2);
+        }
+
+        .btn-reveal {
+            background: linear-gradient(180deg, #e8d5a3 0%, #c9a227 100%);
+            color: var(--ink);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-reveal::after {
+            content: '👁️';
+            margin-left: 10px;
+        }
+
+        /* Result Display */
+        .result-display {
+            background: linear-gradient(135deg, rgba(201, 162, 39, 0.1) 0%, rgba(201, 162, 39, 0.2) 100%);
+            border: 2px solid var(--gold);
+            padding: 20px 30px;
+            margin: 20px 0;
+            font-family: 'Cinzel', serif;
+            font-size: 1.3rem;
+            text-align: center;
+        }
+
+        .result-positive {
+            color: var(--green-ink);
+            border-color: var(--green-ink);
+            background: linear-gradient(135deg, rgba(0, 100, 0, 0.05) 0%, rgba(0, 100, 0, 0.1) 100%);
+        }
+
+        .result-negative {
+            color: var(--red-ink);
+            border-color: var(--red-ink);
+            background: linear-gradient(135deg, rgba(139, 0, 0, 0.05) 0%, rgba(139, 0, 0, 0.1) 100%);
+        }
+
+        /* Etapes Indicator */
+        .steps-indicator {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+
+        .step-dot {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .step-number {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 3px solid var(--gold-dark);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Cinzel', serif;
+            font-size: 1.2rem;
+            background: var(--parchment);
+            transition: all 0.3s ease;
+        }
+
+        .step-dot.active .step-number,
+        .step-dot.completed .step-number {
+            background: linear-gradient(180deg, var(--gold-light) 0%, var(--gold) 100%);
+            border-color: var(--gold);
+        }
+
+        .step-dot.completed .step-number::after {
+            content: '✓';
+            color: var(--green-ink);
+        }
+
+        .step-label {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.9rem;
+            color: var(--ink-light);
+            text-align: center;
+            max-width: 100px;
+        }
+
+        /* Journal Entries */
+        .journal-entry {
+            margin: 20px 0;
+        }
+
+        .journal-header {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 20px;
+            background: linear-gradient(90deg, var(--gold-light), var(--gold), var(--gold-light));
+            font-family: 'Cinzel', serif;
+            margin-bottom: 0;
+        }
+
+        .journal-table {
+            margin-top: 0;
+        }
+
+        .journal-table input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid var(--gold-dark);
+            background: rgba(255, 255, 255, 0.9);
+            font-family: 'EB Garamond', serif;
+            font-size: 1rem;
+        }
+
+        /* Accordion for reference */
+        .accordion {
+            margin: 20px 0;
+        }
+
+        .accordion-header {
+            background: linear-gradient(180deg, var(--parchment-dark) 0%, var(--parchment) 100%);
+            padding: 15px 20px;
+            border: 2px solid var(--gold-dark);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: 'Cinzel', serif;
+            transition: all 0.3s ease;
+        }
+
+        .accordion-header:hover {
+            background: linear-gradient(180deg, var(--gold-light) 0%, var(--parchment-dark) 100%);
+        }
+
+        .accordion-header .arrow {
+            transition: transform 0.3s ease;
+        }
+
+        .accordion-header.open .arrow {
+            transform: rotate(180deg);
+        }
+
+        .accordion-content {
+            display: none;
+            border: 2px solid var(--gold-dark);
+            border-top: none;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.5);
+        }
+
+        .accordion-content.open {
+            display: block;
+            animation: slideDown 0.3s ease;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Feedback Messages */
+        .feedback {
+            padding: 15px 20px;
+            margin: 15px 0;
+            border-radius: 5px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            display: none;
+        }
+
+        .feedback.success {
+            background: rgba(0, 100, 0, 0.1);
+            border: 2px solid var(--green-ink);
+            color: var(--green-ink);
+            display: block;
+        }
+
+        .feedback.error {
+            background: rgba(139, 0, 0, 0.1);
+            border: 2px solid var(--red-ink);
+            color: var(--red-ink);
+            display: block;
+        }
+
+        /* Decorative Elements */
+        .decorative-line {
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+            margin: 30px 0;
+        }
+
+        .fleur-de-lis {
+            text-align: center;
+            font-size: 2rem;
+            color: var(--gold);
+            margin: 20px 0;
+        }
+
+        /* Highlight for special calculations */
+        .highlight-purple {
+            background: rgba(75, 0, 130, 0.1);
+            border: 2px dashed var(--purple-ink);
+            padding: 15px;
+            margin: 10px 0;
+        }
+
+        .highlight-purple .label {
+            color: var(--purple-ink);
+            font-weight: bold;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .main-title { font-size: 1.8rem; }
+            .card { padding: 20px; }
+            .invoice { padding: 20px; }
+            .invoice-header { grid-template-columns: 1fr; }
+            .input-group { flex-direction: column; align-items: stretch; }
+            .input-group label { min-width: auto; }
+            th, td { padding: 8px 10px; font-size: 0.9rem; }
+        }
+
+        /* Highlight animation */
+        .highlight {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(75, 0, 130, 0.4); }
+            50% { box-shadow: 0 0 20px 5px rgba(75, 0, 130, 0.6); }
+        }
     </style>
 </head>
 <body>
-    <div id="root"></div>
+    <div class="container">
+        <header>
+            <h1 class="main-title">L'Arte della Contabilità</h1>
+            <p class="subtitle">Vente de Voiture — Citroën C4</p>
+            <div class="special-badge">🚗 PARTICULARITÉ : TVA RÉCUPÉRABLE À 50% SEULEMENT</div>
+            <p class="da-vinci-quote">"La simplicité est la sophistication suprême" — Leonardo da Vinci</p>
+        </header>
 
-    <!-- Script principal compilé par Babel -->
-    <script type="text/babel" data-type="module">
-        import React, { useState, useMemo, useEffect } from 'react';
-        import { createRoot } from 'react-dom/client';
-        import { 
-            BookOpen, 
-            ChevronRight, 
-            RotateCcw, 
-            Trophy, 
-            CheckCircle2, 
-            Info, 
-            ArrowLeft,
-            GraduationCap
-        } from 'lucide-react';
+        <!-- Encadré spécial TVA Voiture -->
+        <div class="tva-special-box">
+            <h3>📋 Règles particulières pour les voitures (PME)</h3>
+            <div class="tva-rule">
+                <div class="tva-rule-icon">🛒</div>
+                <div class="tva-rule-content">
+                    <div class="tva-rule-title">À L'ACHAT : TVA récupérable à 50% maximum</div>
+                    <p>Lors de l'achat d'une voiture, l'entreprise ne peut récupérer que <strong>50% de la TVA</strong>. Les 50% non récupérables s'ajoutent au coût d'acquisition !</p>
+                    <div class="tva-formula">Valeur d'acquisition = Prix HTVA + (TVA × 50%)</div>
+                </div>
+            </div>
+            <div class="tva-rule">
+                <div class="tva-rule-icon">💰</div>
+                <div class="tva-rule-content">
+                    <div class="tva-rule-title">À LA VENTE : TVA calculée sur 50% du prix de vente</div>
+                    <p>Lors de la vente, la TVA à facturer se calcule sur <strong>50% du prix de vente HTVA</strong> uniquement.</p>
+                    <div class="tva-formula">TVA à payer = Prix HTVA × 21% × 50%</div>
+                </div>
+            </div>
+        </div>
 
-        // --- Données des exercices (extraites du prompt) ---
-        // Pour des raisons de clarté, nous importons ou définissons les 200 ici.
-        // (Note: Dans une version séparée, cela serait dans data/exercises.js)
-        const ALL_EXERCISES = [
-            // 1) Article défini (1-30)
-            { id: 1, prompt: "Dans notre classe, ___ professeur explique la leçon.", answer: "Dans notre classe, le professeur explique la leçon.", rule: "On utilise l’article défini (le, la, l’, les) pour parler d’une personne identifiée dans le contexte." },
-            { id: 2, prompt: "(le / un) ___ soleil se lève tôt en été.", answer: "Le soleil se lève tôt en été.", rule: "On utilise l’article défini pour parler de quelque chose d’unique (ici, le soleil)." },
-            { id: 3, prompt: "J’ai mis ___ clés sur la table. Tu les vois ?", answer: "J’ai mis les clés sur la table. Tu les vois ?", rule: "On utilise l’article défini (les) pour parler d’objets précis, connus des interlocuteurs." },
-            { id: 4, prompt: "(la / une) ___ Belgique est un pays européen.", answer: "La Belgique est un pays européen.", rule: "On utilise souvent l’article défini avec les noms de pays (ici, la Belgique)." },
-            { id: 5, prompt: "Je préfère ___ café au thé (général).", answer: "Je préfère le café au thé.", rule: "On utilise l’article défini pour parler d’une chose en général (valeur générique)." },
-            { id: 6, prompt: "Il ferme ___ porte parce qu’il fait froid.", answer: "Il ferme la porte parce qu’il fait froid.", rule: "L’article défini s’emploie quand on parle d’un élément identifiable dans la situation (ici, la porte de la pièce)." },
-            { id: 7, prompt: "Après le sport, elle se lave ___ mains.", answer: "Après le sport, elle se lave les mains.", rule: "Avec les parties du corps, on emploie souvent l’article défini (les) avec un verbe pronominal." },
-            { id: 8, prompt: "(le / un) ___ directeur veut voir les parents.", answer: "Le directeur veut voir les parents.", rule: "Article défini : on parle d’une personne connue dans l’établissement (le directeur)." },
-            { id: 9, prompt: "Tu as lu ___ message que je t’ai envoyé hier ?", answer: "Tu as lu le message que je t’ai envoyé hier ?", rule: "Article défini : on reprend une information déjà mentionnée (message déjà identifié)." },
-            { id: 10, prompt: "___ élèves de cette classe passent un test aujourd’hui.", answer: "Les élèves de cette classe passent un test aujourd’hui.", rule: "Article défini au pluriel : on parle d’un groupe précis (les élèves de cette classe)." },
-            { id: 11, prompt: "(la / une) ___ musique est trop forte.", answer: "La musique est trop forte.", rule: "Article défini : dans la situation, la musique est identifiable (on l’entend)." },
-            { id: 12, prompt: "Je vais à la gare et j’attends ___ train de 8 h 10.", answer: "Je vais à la gare et j’attends le train de 8 h 10.", rule: "Article défini : on parle d’un train précis (horaire indiqué)." },
-            { id: 13, prompt: "___ ordinateur du bureau ne fonctionne plus.", answer: "L’ordinateur du bureau ne fonctionne plus.", rule: "Article défini + précision (complément du nom) : l’objet est identifié (l’ordinateur du bureau)." },
-            { id: 14, prompt: "(les / des) ___ devoirs sont sur la plateforme de l’école.", answer: "Les devoirs sont sur la plateforme de l’école.", rule: "Article défini : on parle des devoirs connus dans ce contexte scolaire." },
-            { id: 15, prompt: "Quand je suis malade, je vais chez ___ médecin.", answer: "Quand je suis malade, je vais chez le médecin.", rule: "Article défini : on parle du médecin de référence (général dans cette situation)." },
-            { id: 16, prompt: "___ français est une langue internationale.", answer: "Le français est une langue internationale.", rule: "Article défini avec une langue : emploi fréquent pour parler de la langue en général." },
-            { id: 17, prompt: "Je cherche ___ livre que tu m’as conseillé.", answer: "Je cherche le livre que tu m’as conseillé.", rule: "Article défini : le livre est identifié par une précision (que tu m’as conseillé)." },
-            { id: 18, prompt: "(la / une) ___ Terre tourne autour du Soleil.", answer: "La Terre tourne autour du Soleil.", rule: "Article défini : on parle d’un nom propre unique (ici, la Terre)." },
-            { id: 19, prompt: "Peux-tu ouvrir ___ fenêtre, s’il te plaît ?", answer: "Peux-tu ouvrir la fenêtre, s’il te plaît ?", rule: "Article défini : la fenêtre est identifiable dans la pièce." },
-            { id: 20, prompt: "___ enfants jouent dans la cour de l’école.", answer: "Les enfants jouent dans la cour de l’école.", rule: "Article défini : on parle des enfants présents dans ce lieu (la cour)." },
-            { id: 21, prompt: "(le / un) ___ lundi, je n’ai pas cours.", answer: "Le lundi, je n’ai pas cours.", rule: "Article défini : valeur habituelle ou générale (tous les lundis)." },
-            { id: 22, prompt: "___ eau de cette bouteille est froide.", answer: "L’eau de cette bouteille est froide.", rule: "Article défini : le nom est identifié par une précision (de cette bouteille)." },
-            { id: 23, prompt: "Dans ce film, ___ acteur principal est excellent.", answer: "Dans ce film, l’acteur principal est excellent.", rule: "Article défini : l’élément est unique dans le film (acteur principal)." },
-            { id: 24, prompt: "(la / une) ___ faim, c’est une sensation normale.", answer: "La faim, c’est une sensation normale.", rule: "Article défini : emploi générique pour parler d’une notion en général." },
-            { id: 25, prompt: "Internet est utile, mais il faut vérifier les sources. (aucun article)", answer: "Internet est utile, mais il faut vérifier les sources.", rule: "Remarque : certains noms comme Internet s’emploient souvent sans article selon l’usage." },
-            { id: 26, prompt: "Je ne retrouve pas ___ stylo bleu : il était sur mon bureau.", answer: "Je ne retrouve pas le stylo bleu : il était sur mon bureau.", rule: "Article défini : l’objet est identifié (stylo bleu, connu)." },
-            { id: 27, prompt: "(les / des) ___ informations sur le site sont à jour.", answer: "Les informations sur le site sont à jour.", rule: "Article défini : on parle d’informations précises (celles du site)." },
-            { id: 28, prompt: "___ voiture de mon voisin est rouge.", answer: "La voiture de mon voisin est rouge.", rule: "Article défini : l’objet est identifié par un complément (de mon voisin)." },
-            { id: 29, prompt: "Avant de sortir, il vérifie ___ météo.", answer: "Avant de sortir, il vérifie la météo.", rule: "Article défini : on parle d’une information générale connue (la météo)." },
-            { id: 30, prompt: "Après le cours, nous allons à ___ bibliothèque de l’école.", answer: "Après le cours, nous allons à la bibliothèque de l’école.", rule: "Article défini : on parle d’un lieu identifié dans l’établissement (la bibliothèque)." },
+        <nav class="nav-levels">
+            <button class="nav-btn active" onclick="showLevel(1)">📜 Niveau I<br><small>L'Énoncé</small></button>
+            <button class="nav-btn" onclick="showLevel(2)">📋 Niveau II<br><small>La Facture</small></button>
+            <button class="nav-btn" onclick="showLevel(3)">✍️ Niveau III<br><small>Les Étapes</small></button>
+            <button class="nav-btn" onclick="showLevel(4)">📖 Niveau IV<br><small>L'Écriture</small></button>
+        </nav>
 
-            // 2) Article indéfini (31-60)
-            { id: 31, prompt: "J’ai acheté ___ cahier pour le cours de français.", answer: "J’ai acheté un cahier pour le cours de français.", rule: "Article indéfini (un, une, des) : on introduit quelque chose de nouveau, non précisé." },
-            { id: 32, prompt: "(une / la) Elle cherche ___ solution à ce problème.", answer: "Elle cherche une solution à ce problème.", rule: "Article indéfini : la solution n’est pas identifiée, c’est une parmi d’autres." },
-            { id: 33, prompt: "Dans la rue, j’ai vu ___ chien très gentil.", answer: "Dans la rue, j’ai vu un chien très gentil.", rule: "Article indéfini : on parle d’un animal non connu auparavant." },
-            { id: 34, prompt: "Il a trouvé ___ emploi près de chez lui.", answer: "Il a trouvé un emploi près de chez lui.", rule: "Article indéfini : on introduit une information nouvelle." },
-            { id: 35, prompt: "(un / le) Peux-tu me prêter ___ stylo, s’il te plaît ?", answer: "Peux-tu me prêter un stylo, s’il te plaît ?", rule: "Article indéfini : n’importe quel stylo convient (pas un stylo précis)." },
-            { id: 36, prompt: "J’ai reçu ___ message étrange ce matin.", answer: "J’ai reçu un message étrange ce matin.", rule: "Article indéfini : le message n’est pas encore identifié par l’interlocuteur." },
-            { id: 37, prompt: "Elle veut acheter ___ robe pour la fête.", answer: "Elle veut acheter une robe pour la fête.", rule: "Article indéfini : robe non spécifiée." },
-            { id: 38, prompt: "Nous avons ___ voisins sympathiques.", answer: "Nous avons des voisins sympathiques.", rule: "Article indéfini pluriel (des) : on parle de plusieurs personnes non précisées." },
-            { id: 39, prompt: "(des / les) J’ai besoin de ___ informations sur ce sujet.", answer: "J’ai besoin d’informations sur ce sujet.", rule: "Souvent, on n’emploie pas d’article devant informations au sens général." },
-            { id: 40, prompt: "Il y a ___ problème avec l’imprimante.", answer: "Il y a un problème avec l’imprimante.", rule: "Article indéfini : on introduit un problème (pas encore précisé)." },
-            { id: 41, prompt: "Elle a adopté ___ chatte.", answer: "Elle a adopté une chatte.", rule: "Article indéfini : animal nouveau dans le discours." },
-            { id: 42, prompt: "J’ai rencontré ___ professeur très patient.", answer: "J’ai rencontré un professeur très patient.", rule: "Article indéfini : on parle d’un professeur non identifié." },
-            { id: 43, prompt: "(un / le) Il habite dans ___ appartement au centre-ville.", answer: "Il habite dans un appartement au centre-ville.", rule: "Article indéfini : appartement non précisé." },
-            { id: 44, prompt: "Tu connais ___ bon restaurant dans ce quartier ?", answer: "Tu connais un bon restaurant dans ce quartier ?", rule: "Article indéfini : on cherche un exemple parmi plusieurs restaurants possibles." },
-            { id: 45, prompt: "Nous cherchons ___ salle pour travailler en groupe.", answer: "Nous cherchons une salle pour travailler en groupe.", rule: "Article indéfini : la salle n’est pas encore déterminée." },
-            { id: 46, prompt: "Elle a écrit ___ lettre de motivation.", answer: "Elle a écrit une lettre de motivation.", rule: "Article indéfini : une lettre (pas une lettre connue)." },
-            { id: 47, prompt: "Il veut acheter ___ chaussures confortables.", answer: "Il veut acheter des chaussures confortables.", rule: "Article indéfini pluriel : plusieurs chaussures, non précisées." },
-            { id: 48, prompt: "(un / une) C’est ___ idée intéressante.", answer: "C’est une idée intéressante.", rule: "Article indéfini : on présente une idée parmi d’autres ; accord en genre (idée est féminin)." },
-            { id: 49, prompt: "J’ai besoin de ___ minute pour finir.", answer: "J’ai besoin d’une minute pour finir.", rule: "Article indéfini : durée non précise ; élision de de + une -> d’une." },
-            { id: 50, prompt: "Ils ont réservé ___ hôtel pas trop cher.", answer: "Ils ont réservé un hôtel pas trop cher.", rule: "Article indéfini : hôtel non identifié auparavant." },
-            { id: 51, prompt: "Elle a acheté ___ fruits au marché.", answer: "Elle a acheté des fruits au marché.", rule: "Article indéfini pluriel : quantité non précisée de choses comptables." },
-            { id: 52, prompt: "(un / le) Il faut remplir ___ formulaire.", answer: "Il faut remplir un formulaire.", rule: "Article indéfini : on introduit un document, sans le préciser." },
-            { id: 53, prompt: "J’ai vu ___ affiche sur la porte.", answer: "J’ai vu une affiche sur la porte.", rule: "Article indéfini : affiche non connue avant." },
-            { id: 54, prompt: "Nous avons ___ cours d’informatique aujourd’hui.", answer: "Nous avons un cours d’informatique aujourd’hui.", rule: "Article indéfini : un cours (une séance) non précisé." },
-            { id: 55, prompt: "Il a expliqué ___ règle importante.", answer: "Il a expliqué une règle importante.", rule: "Article indéfini : on introduit une règle." },
-            { id: 56, prompt: "J’ai acheté ___ cadeau pour mon ami.", answer: "J’ai acheté un cadeau pour mon ami.", rule: "Article indéfini : cadeau non identifié." },
-            { id: 57, prompt: "(une / la) Elle a pris ___ photo de la classe.", answer: "Elle a pris une photo de la classe.", rule: "Article indéfini : on parle d’une photo parmi plusieurs possibles." },
-            { id: 58, prompt: "Il a reçu ___ appels pendant la réunion.", answer: "Il a reçu des appels pendant la réunion.", rule: "Article indéfini pluriel : plusieurs appels non précisés." },
-            { id: 59, prompt: "C’est ___ situation difficile.", answer: "C’est une situation difficile.", rule: "Article indéfini : situation nouvelle dans le discours." },
-            { id: 60, prompt: "Ils ont trouvé ___ informations utiles.", answer: "Ils ont trouvé des informations utiles.", rule: "Article indéfini pluriel : plusieurs informations, non spécifiées." },
+        <!-- NIVEAU 1: L'Énoncé -->
+        <section id="level1" class="level-panel active">
+            <div class="card">
+                <h2 class="card-title"><span class="icon">📜</span> Énoncé de l'Exercice 2</h2>
+                <div style="font-size: 1.15rem; line-height: 1.8;">
+                    <p>Vous réalisez l'achat d'une voiture <strong>Citroën C4</strong> d'une valeur de <strong>20.000 €</strong> le <strong>01/01/2025</strong> (TVA 21%).</p>
+                    <br>
+                    <div class="highlight-purple">
+                        <p class="label">⚠️ Il s'agit d'une PME :</p>
+                        <p>La TVA n'est récupérable qu'à <strong>50% maximum</strong> lors de l'achat d'une voiture.</p>
+                        <p>Calcul de la valeur d'acquisition : 20.000 + (4.200 × 50%) = <strong>22.100 €</strong></p>
+                    </div>
+                    <br>
+                    <p><strong>Questions :</strong></p>
+                    <p>a) Comptabilisez l'achat de la voiture.</p>
+                    <p>b) Établissez le tableau d'amortissement et comptabilisez les amortissements. <br>
+                       <em>Durée de vie estimée : 4 ans en linéaire.</em></p>
+                    <br>
+                    <p>Le <strong>01/12/2027</strong>, vous vendez votre voiture pour une valeur de :</p>
+                    <div class="result-display result-positive" style="margin: 20px 0;">
+                        <strong>Hypothèse 1 : 15.000 € HTVA</strong>
+                    </div>
+                    <div class="highlight-purple">
+                        <p class="label">⚠️ Particularité pour la vente :</p>
+                        <p>Vous ne devez calculer que <strong>50% de la TVA</strong> sur votre facture de vente.</p>
+                        <p>TVA = 21% × 50% × 15.000 € = <strong>1.575 €</strong></p>
+                    </div>
+                    <br>
+                    <p>c) Comptabilisez la vente de votre véhicule.</p>
+                </div>
+            </div>
 
-            // 3) Article partitif (61-90)
-            { id: 61, prompt: "Je bois ___ eau après le sport.", answer: "Je bois de l’eau après le sport.", rule: "Article partitif : on parle d’une quantité non précisée d’une matière (eau)." },
-            { id: 62, prompt: "Il mange ___ pain au petit-déjeuner.", answer: "Il mange du pain au petit-déjeuner.", rule: "Article partitif (du) : quantité indéfinie d’un nom non dénombrable (pain)." },
-            { id: 63, prompt: "Elle ajoute ___ sucre dans le café.", answer: "Elle ajoute du sucre dans le café.", rule: "Article partitif : quantité non précisée (sucre)." },
-            { id: 64, prompt: "Nous achetons ___ légumes pour la soupe.", answer: "Nous achetons des légumes pour la soupe.", rule: "Article partitif au pluriel : quantité indéfinie d’un aliment souvent au pluriel (légumes)." },
-            { id: 65, prompt: "(de la / une) Il met ___ confiture sur la tartine.", answer: "Il met de la confiture sur la tartine.", rule: "Article partitif : confiture est une matière, quantité non précisée." },
-            { id: 66, prompt: "Tu veux ___ café ou ___ thé ?", answer: "Tu veux du café ou du thé ?", rule: "Article partitif : quantité indéfinie de boisson." },
-            { id: 67, prompt: "Elle boit ___ lait chaud le soir.", answer: "Elle boit du lait chaud le soir.", rule: "Article partitif : quantité non précisée (lait)." },
-            { id: 68, prompt: "Je prends ___ salade et ___ fromage.", answer: "Je prends de la salade et du fromage.", rule: "Article partitif : quantité indéfinie d’aliments non dénombrables." },
-            { id: 69, prompt: "Il y a ___ neige sur la route.", answer: "Il y a de la neige sur la route.", rule: "Article partitif : quantité non précise d’un nom de matière (neige)." },
-            { id: 70, prompt: "Nous faisons ___ sport deux fois par semaine.", answer: "Nous faisons du sport deux fois par semaine.", rule: "Article partitif : sport est pris comme activité non dénombrable (sens général)." },
-            { id: 71, prompt: "Elle écoute ___ musique pour se détendre.", answer: "Elle écoute de la musique pour se détendre.", rule: "Article partitif : musique comme notion non dénombrable." },
-            { id: 72, prompt: "Il a ___ courage : il parle en public.", answer: "Il a du courage : il parle en public.", rule: "Article partitif : courage est un nom abstrait non dénombrable." },
-            { id: 73, prompt: "Pour la recette, il faut ___ farine.", answer: "Pour la recette, il faut de la farine.", rule: "Article partitif : quantité indéfinie de farine." },
-            { id: 74, prompt: "Elle boit ___ jus d’orange.", answer: "Elle boit du jus d’orange.", rule: "Article partitif : quantité indéfinie de boisson." },
-            { id: 75, prompt: "Il met ___ huile dans la poêle.", answer: "Il met de l’huile dans la poêle.", rule: "Article partitif avec élision : de l’ devant une voyelle (huile)." },
-            { id: 76, prompt: "Nous voulons ___ informations claires.", answer: "Nous voulons des informations claires.", rule: "Article partitif au pluriel : quantité indéfinie d’un nom généralement pluriel dans ce sens." },
-            { id: 77, prompt: "(du / un) Il boit ___ thé à la menthe.", answer: "Il boit du thé à la menthe.", rule: "Article partitif : on parle de thé en quantité indéfinie." },
-            { id: 78, prompt: "Elle achète ___ viande chez le boucher.", answer: "Elle achète de la viande chez le boucher.", rule: "Article partitif : quantité indéfinie (viande)." },
-            { id: 79, prompt: "Je voudrais ___ eau, s’il te plaît.", answer: "Je voudrais de l’eau, s’il te plaît.", rule: "Article partitif : quantité indéfinie (eau)." },
-            { id: 80, prompt: "Il prend ___ temps pour comprendre.", answer: "Il prend du temps pour comprendre.", rule: "Article partitif : temps au sens de durée non dénombrable." },
-            { id: 81, prompt: "Elle fait ___ progrès en français.", answer: "Elle fait des progrès en français.", rule: "Article partitif au pluriel : progrès est souvent employé au pluriel pour une quantité indéfinie." },
-            { id: 82, prompt: "Nous avons ___ chance : il n’a pas plu.", answer: "Nous avons de la chance : il n’a pas plu.", rule: "Article partitif : chance comme notion abstraite." },
-            { id: 83, prompt: "Il y a ___ monde dans le bus.", answer: "Il y a du monde dans le bus.", rule: "Article partitif : monde au sens de foule (quantité indéfinie)." },
-            { id: 84, prompt: "Elle boit ___ soupe chaude.", answer: "Elle boit de la soupe chaude.", rule: "Article partitif : quantité indéfinie (soupe)." },
-            { id: 85, prompt: "Je mange ___ chocolat noir.", answer: "Je mange du chocolat noir.", rule: "Article partitif : quantité indéfinie (chocolate)." },
-            { id: 86, prompt: "Pour écrire, il faut ___ patience.", answer: "Pour écrire, il faut de la patience.", rule: "Article partitif : nom abstrait non dénombrable (patience)." },
-            { id: 87, prompt: "Il écoute ___ informations à la radio.", answer: "Il écoute des informations à la radio.", rule: "Article partitif au pluriel : informations au sens de nouvelles, quantité indéfinie." },
-            { id: 88, prompt: "Elle met ___ sel et ___ poivre.", answer: "Elle met du sel et du poivre.", rule: "Article partitif : quantité non précisée de condiments." },
-            { id: 89, prompt: "Nous buvons ___ eau pétillante.", answer: "Nous buvons de l’eau pétillante.", rule: "Article partitif : quantité indéfinie d’eau." },
-            { id: 90, prompt: "Elle ajoute ___ crème dans la sauce.", answer: "Elle ajoute de la crème dans la sauce.", rule: "Article partitif : quantité non précisée d’une matière (crème)." },
+            <div class="card">
+                <h2 class="card-title"><span class="icon">📝</span> Écriture d'Achat de la Voiture</h2>
+                <div class="highlight-purple" style="margin-bottom: 20px;">
+                    <p><strong>Calcul de la valeur d'acquisition :</strong></p>
+                    <p>Prix HTVA : 20.000 €</p>
+                    <p>TVA totale (21%) : 4.200 €</p>
+                    <p>TVA récupérable (50%) : 2.100 € → compte 4110</p>
+                    <p>TVA non récupérable (50%) : 2.100 € → <strong class="special">ajouté à la valeur du bien</strong></p>
+                    <p><strong>Valeur comptable de la voiture : 20.000 + 2.100 = 22.100 €</strong></p>
+                </div>
+                <div class="journal-entry">
+                    <div class="journal-header">
+                        <span>Journal : JA</span>
+                        <span>Date : 01/01/2025</span>
+                    </div>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Compte</th>
+                                    <th>Libellé</th>
+                                    <th>Débit (€)</th>
+                                    <th>Crédit (€)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>2410</td>
+                                    <td>Voiture C4 <span class="special">(+50% TVA non récup.)</span></td>
+                                    <td class="amount debit">22.100,00</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>4110</td>
+                                    <td>TVA à récupérer <span class="special">(50% seulement)</span></td>
+                                    <td class="amount debit">2.100,00</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>4400</td>
+                                    <td>Fournisseur</td>
+                                    <td></td>
+                                    <td class="amount credit">24.200,00</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
 
-            // 4) Élision (91-115)
-            { id: 91, prompt: "___ école est près de la maison. (le / la -> l’)", answer: "L’école est près de la maison.", rule: "Élision : le ou la devient l’ devant une voyelle (école)." },
-            { id: 92, prompt: "Je regarde ___ image sur mon téléphone. (la -> l’)", answer: "Je regarde l’image sur mon téléphone.", rule: "Élision : la devient l’ devant une voyelle (image)." },
-            { id: 93, prompt: "Il parle de ___ histoire de ce film. (de la -> de l’)", answer: "Il parle de l’histoire de ce film.", rule: "Élision : de la devient de l’ devant une voyelle ou un h muet (histoire)." },
-            { id: 94, prompt: "Elle va à ___ université demain. (à la -> à l’)", answer: "Elle va à l’université demain.", rule: "Élision : à la devient à l’ devant une voyelle (université)." },
-            { id: 95, prompt: "Corrige la phrase : Le ami de Paul arrive.", answer: "L’ami de Paul arrive.", rule: "Élision obligatoire : le devient l’ devant une voyelle (ami)." },
-            { id: 96, prompt: "Corrige la phrase : La hôtel est complet.", answer: "L’hôtel est complet.", rule: "Élision obligatoire : la devient l’ devant un h muet (hôtel)." },
-            { id: 97, prompt: "Je reviens de ___ hôpital. (de le / de la / de l’)", answer: "Je reviens de l’hôpital.", rule: "Élision : de l’ devant un h muet (hôpital)." },
-            { id: 98, prompt: "Il arrive à ___ heure. (à la -> à l’)", answer: "Il arrive à l’heure.", rule: "Élision : à l’ devant un h muet (heure)." },
-            { id: 99, prompt: "Nous parlons de ___ énergie et de ___ avenir. (de l’ / de la)", answer: "Nous parlons de l’énergie et de l’avenir.", rule: "Élision : de l’ devant une voyelle (énergie, avenir)." },
-            { id: 100, prompt: "___ arbre est très grand. (le -> l’)", answer: "L’arbre est très grand.", rule: "Élision : le devient l’ devant une voyelle (arbre)." },
-            { id: 101, prompt: "Elle écoute ___ émission à la radio. (la -> l’)", answer: "Elle écoute l’émission à la radio.", rule: "Élision : la devient l’ devant une voyelle (émission)." },
-            { id: 102, prompt: "Il parle de ___ art moderne. (de l’)", answer: "Il parle de l’art moderne.", rule: "Élision : de l’ devant une voyelle (art)." },
-            { id: 103, prompt: "Nous allons à ___ opéra ce soir. (à l’)", answer: "Nous allons à l’opéra ce soir.", rule: "Élision : à l’ devant une voyelle (opéra)." },
-            { id: 104, prompt: "Corrige : Je vais à la école.", answer: "Je vais à l’école.", rule: "Élision obligatoire : à la devient à l’ devant une voyelle (école)." },
-            { id: 105, prompt: "Il a peur de ___ accident. (de l’)", answer: "Il a peur de l’accident.", rule: "Élision : de l’ devant une voyelle (accident)." },
-            { id: 106, prompt: "Tu connais ___ adresse de l’entreprise ? (l’)", answer: "Tu connais l’adresse de l’entreprise ?", rule: "Élision : l’ devant une voyelle (adresse)." },
-            { id: 107, prompt: "Elle revient de ___ école à pied. (de l’)", answer: "Elle revient de l’école à pied.", rule: "Élision : de l’ devant une voyelle (école)." },
-            { id: 108, prompt: "Il parle à ___ amie de sa sœur. (à l’)", answer: "Il parle à l’amie de sa sœur.", rule: "Élision : à l’ devant une voyelle (amie)." },
-            { id: 109, prompt: "Je pense à ___ année prochaine. (à l’)", answer: "Je pense à l’année prochaine.", rule: "Élision : à l’ devant une voyelle (année)." },
-            { id: 110, prompt: "Nous venons de ___ Italie. (de l’)", answer: "Nous venons de l’Italie.", rule: "Élision : de l’ devant une voyelle (Italie)." },
-            { id: 111, prompt: "Je n’aime pas ___ odeur de cigarette. (l’)", answer: "Je n’aime pas l’odeur de cigarette.", rule: "Élision : l’ devant une voyelle (odeur)." },
-            { id: 112, prompt: "Il parle de ___ habitude qu’il veut changer. (de l’)", answer: "Il parle de l’habitude qu’il veut changer.", rule: "Élision : de l’ devant un h muet (habitude)." },
-            { id: 113, prompt: "Elle va à ___ hôtel à pied. (à l’)", answer: "Elle va à l’hôtel à pied.", rule: "Élision : à l’ devant un h muet (hôtel)." },
-            { id: 114, prompt: "___ homme attend devant la porte. (l’)", answer: "L’homme attend devant la porte.", rule: "Élision : l’ devant un h muet (homme)." },
-            { id: 115, prompt: "Corrige : De la eau, s’il te plaît.", answer: "De l’eau, s’il te plaît.", rule: "Élision : de la devient de l’ devant une voyelle (eau)." },
+            <div class="card">
+                <h2 class="card-title"><span class="icon">📊</span> Tableau d'Amortissement</h2>
+                <p style="margin-bottom: 15px; font-style: italic; color: var(--ink-light);">
+                    Amortissement linéaire sur 4 ans : <strong class="special">22.100</strong> / 4 = <strong>5.525 €/an</strong><br>
+                    <strong>1ère année :</strong> Année complète (achat le 01/01)
+                </p>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Année</th>
+                                <th>Valeur d'acquisition</th>
+                                <th>Amortissement</th>
+                                <th>VCN (Valeur Comptable Nette)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>2025</td>
+                                <td class="amount special">22.100,00</td>
+                                <td class="amount">5.525,00</td>
+                                <td class="amount"><strong>16.575,00</strong></td>
+                            </tr>
+                            <tr>
+                                <td>2026</td>
+                                <td class="amount special">22.100,00</td>
+                                <td class="amount">5.525,00</td>
+                                <td class="amount"><strong>11.050,00</strong></td>
+                            </tr>
+                            <tr style="background: rgba(0, 100, 0, 0.1);">
+                                <td>2027</td>
+                                <td class="amount special">22.100,00</td>
+                                <td class="amount">5.525,00</td>
+                                <td class="amount"><strong>5.525,00</strong></td>
+                            </tr>
+                            <tr>
+                                <td>2028</td>
+                                <td class="amount special">22.100,00</td>
+                                <td class="amount">5.525,00</td>
+                                <td class="amount"><strong>0,00</strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
 
-            // 5) Accord (116-140)
-            { id: 116, prompt: "Choisis : (le / la) ___ table est grande.", answer: "La table est grande.", rule: "Accord : l’article s’accorde avec le genre du nom (table est féminin)." },
-            { id: 117, prompt: "Choisis : (le / la) ___ problème est difficile.", answer: "Le problème est difficile.", rule: "Accord : problème est masculin, donc article le." },
-            { id: 118, prompt: "Choisis : (un / une) ___ personne parle devant la classe.", answer: "Une personne parle devant la classe.", rule: "Accord : personne est féminin, donc une." },
-            { id: 119, prompt: "Choisis : (un / une) ___ exercice commence maintenant.", answer: "Un exercice commence maintenant.", rule: "Accord : exercice est masculin, donc un." },
-            { id: 120, prompt: "Complète : ___ enfants (pluriel) jouent dehors. (les)", answer: "Les enfants jouent dehors.", rule: "Accord : pluriel -> article les." },
-            { id: 121, prompt: "Complète : ___ étudiantes (pluriel) travaillent ensemble. (les)", answer: "Les étudiantes travaillent ensemble.", rule: "Accord : pluriel -> article les." },
-            { id: 122, prompt: "Choisis : (du / de la) Il mange ___ fromage.", answer: "Il mange du fromage.", rule: "Accord : fromage est masculin ; article partitif du." },
-            { id: 123, prompt: "Choisis : (du / de la) Elle boit ___ limonade.", answer: "Elle boit de la limonade.", rule: "Accord : limonade est féminin ; article partitif de la." },
-            { id: 124, prompt: "Choisis : (le / l’) ___ appartement est au troisième étage.", answer: "L’appartement est au troisième étage.", rule: "Accord + élision : appartement est masculin, mais on écrit l’ devant une voyelle." },
-            { id: 125, prompt: "Choisis : (la / l’) ___ histoire est vraie.", answer: "L’histoire est vraie.", rule: "Accord + élision : histoire est féminin ; l’ devant un h muet." },
-            { id: 126, prompt: "Complète : Je vois ___ chats (pluriel).", answer: "Je vois des chats.", rule: "Accord : pluriel -> des (article indéfini pluriel)." },
-            { id: 127, prompt: "Complète : Je vois ___ chat (singulier).", answer: "Je vois un chat.", rule: "Accord : singulier masculin -> un." },
-            { id: 128, prompt: "Complète : Je vois ___ chatte (singulier).", answer: "Je vois une chatte.", rule: "Accord : singulier féminin -> une." },
-            { id: 129, prompt: "Choisis : (le / la) ___ photo est nette.", answer: "La photo est nette.", rule: "Accord : photo est féminin." },
-            { id: 130, prompt: "Choisis : (le / la) ___ livre est intéressant.", answer: "Le livre est intéressant.", rule: "Accord : livre est masculin." },
-            { id: 131, prompt: "Complète : ___ amis (pluriel) arrivent. (les / des)", answer: "Des amis arrivent.", rule: "Accord : pluriel -> des, et ici on introduit des personnes non précises." },
-            { id: 132, prompt: "Complète : ___ ami de Julie arrive. (le / un)", answer: "L’ami de Julie arrive.", rule: "Accord + élision : ami est masculin singulier ; et il est identifié (de Julie)." },
-            { id: 133, prompt: "Choisis : (du / de l’) Il boit ___ eau.", answer: "Il boit de l’eau.", rule: "Accord + élision : eau commence par une voyelle, donc de l’." },
-            { id: 134, prompt: "Choisis : (de la / de l’) Elle écoute ___ musique.", answer: "Elle écoute de la musique.", rule: "Accord : musique est féminin ; pas d’élision car consonne (m)." },
-            { id: 135, prompt: "Complète : ___ hôtels (pluriel) sont complets. (les)", answer: "Les hôtels sont complets.", rule: "Accord : pluriel -> les ; le h de hôtel est muet, mais au pluriel on écrit les." },
-            { id: 136, prompt: "Choisis : (le / la) ___ météo annonce de la pluie.", answer: "La météo annonce de la pluie.", rule: "Accord : météo est féminin." },
-            { id: 137, prompt: "Choisis : (le / la) ___ système est moderne.", answer: "Le système est moderne.", rule: "Accord : système est masculin." },
-            { id: 138, prompt: "Complète : ___ idées (pluriel) sont bonnes. (les)", answer: "Les idées sont bonnes.", rule: "Accord : pluriel -> les." },
-            { id: 139, prompt: "Complète : ___ idée (singulier) est bonne. (une / la)", answer: "Une idée est bonne.", rule: "Accord : féminin singulier -> une ; et l’idée n’est pas identifiée." },
-            { id: 140, prompt: "Choisis : (du / de la) Il a ___ patience.", answer: "Il a de la patience.", rule: "Accord : patience est féminin ; article partitif de la." },
+            <div class="card">
+                <h2 class="card-title"><span class="icon">📖</span> Écritures d'Amortissement Comptabilisées</h2>
+                
+                <div class="journal-entry">
+                    <div class="journal-header">
+                        <span>Journal : JOD</span>
+                        <span>Date : 31/12/2025</span>
+                    </div>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Compte</th>
+                                    <th>Libellé</th>
+                                    <th>Débit (€)</th>
+                                    <th>Crédit (€)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>6302</td>
+                                    <td>Dotation d'amortissement s/IC</td>
+                                    <td class="amount debit">5.525,00</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>2419</td>
+                                    <td>Amortissements actés sur voiture</td>
+                                    <td></td>
+                                    <td class="amount credit">5.525,00</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
 
-            // 6) Articles contractés (141-170)
-            { id: 141, prompt: "Complète : Je vais ___ cinéma ce soir. (à + le)", answer: "Je vais au cinéma ce soir.", rule: "Article contracté : à + le -> au." },
-            { id: 142, prompt: "Complète : Elle parle ___ élèves. (à + les)", answer: "Elle parle aux élèves.", rule: "Article contracté : à + les -> aux." },
-            { id: 143, prompt: "Complète : Je reviens ___ marché. (de + le)", answer: "Je reviens du marché.", rule: "Article contracté : de + le -> du." },
-            { id: 144, prompt: "Complète : Nous sortons ___ cours à 16 heures. (de + les)", answer: "Nous sortons des cours à 16 heures.", rule: "Article contracté : de + les -> des." },
-            { id: 145, prompt: "Complète : Il va ___ plage. (à + la)", answer: "Il va à la plage.", rule: "Pas de contraction avec la : on garde à la." },
-            { id: 146, prompt: "Complète : Elle va ___ école en bus. (à + l’)", answer: "Elle va à l’école en bus.", rule: "Pas de contraction avec l’ : on garde à l’." },
-            { id: 147, prompt: "Complète : Il revient ___ école. (de + l’)", answer: "Il revient de l’école.", rule: "Pas de contraction avec l’ : on garde de l’." },
-            { id: 148, prompt: "Complète : Nous parlons ___ professeur. (de + le)", answer: "Nous parlons du professeur.", rule: "Article contracté : de + le -> du." },
-            { id: 149, prompt: "Complète : La porte ___ bureau est fermée. (de + le)", answer: "La porte du bureau est fermée.", rule: "Article contracté dans un complément du nom : de + le -> du." },
-            { id: 150, prompt: "Complète : La réunion ___ parents commence à 18 heures. (de + les)", answer: "La réunion des parents commence à 18 heures.", rule: "Article contracté : de + les -> des." },
-            { id: 151, prompt: "Complète : Je pense ___ examens de janvier. (à + les)", answer: "Je pense aux examens de janvier.", rule: "Article contracté : à + les -> aux." },
-            { id: 152, prompt: "Complète : Il s’intéresse ___ sport et ___ musique. (à + le)", answer: "Il s’intéresse au sport et à la musique.", rule: "Contraction : à + le -> au ; pas de contraction avec la." },
-            { id: 153, prompt: "Complète : Elle vient ___ université. (de + l’)", answer: "Elle vient de l’université.", rule: "Pas de contraction avec l’ : de l’." },
-            { id: 154, prompt: "Complète : Je vais ___ restaurant italien. (à + le)", answer: "Je vais au restaurant italien.", rule: "Article contracté : à + le -> au." },
-            { id: 155, prompt: "Complète : Nous allons ___ toilettes. (à + les)", answer: "Nous allons aux toilettes.", rule: "Article contracté : à + les -> aux." },
-            { id: 156, prompt: "Complète : Il sort ___ bus. (de + le)", answer: "Il sort du bus.", rule: "Article contracté : de + le -> du." },
-            { id: 157, prompt: "Complète : Je viens ___ travail. (de + le)", answer: "Je viens du travail.", rule: "Article contracté : de + le -> du." },
-            { id: 158, prompt: "Complète : Elle parle ___ amie. (à + l’)", answer: "Elle parle à l’amie.", rule: "Pas de contraction avec l’ : à l’." },
-            { id: 159, prompt: "Complète : Il pense ___ amie. (à + l’)", answer: "Il pense à l’amie.", rule: "Pas de contraction avec l’ : à l’." },
-            { id: 160, prompt: "Complète : Il parle ___ mairie. (à + la)", answer: "Il parle à la mairie.", rule: "Pas de contraction avec la : à la." },
-            { id: 161, prompt: "Il revient ___ mairie. (de + la)", answer: "Il revient de la mairie.", rule: "Pas de contraction avec la : de la." },
-            { id: 162, prompt: "Je parle ___ directeur. (à + le)", answer: "Je parle au directeur.", rule: "Article contracté : à + le -> au." },
-            { id: 163, prompt: "Je téléphone ___ secrétaires. (à + les)", answer: "Je téléphone aux secrétaires.", rule: "Article contracté : à + les -> aux." },
-            { id: 164, prompt: "Il a besoin ___ aide. (de + l’)", answer: "Il a besoin de l’aide.", rule: "Pas de contraction avec l’ : de l’." },
-            { id: 165, prompt: "Il manque ___ informations. (de + les)", answer: "Il manque des informations.", rule: "Article contracté : de + les -> des (ici : il manque des informations)." },
-            { id: 166, prompt: "Le livre ___ étudiant est sur la table. (de + l’)", answer: "Le livre de l’étudiant est sur la table.", rule: "Pas de contraction avec l’ : de l’." },
-            { id: 167, prompt: "Les clés ___ voiture sont dans le sac. (de + la)", answer: "Les clés de la voiture sont dans le sac.", rule: "Pas de contraction avec la : de la." },
-            { id: 168, prompt: "Le nom ___ élèves est sur la liste. (de + les)", answer: "Le nom des élèves est sur la liste.", rule: "Article contracté : de + les -> des." },
-            { id: 169, prompt: "Nous parlons ___ habitudes de travail. (de + les)", answer: "Nous parlons des habitudes de travail.", rule: "Article contracté : de + les -> des." },
-            { id: 170, prompt: "Elle pense ___ avenir. (à + l’)", answer: "Elle pense à l’avenir.", rule: "Pas de contraction avec l’ : à l’." },
+                <div class="journal-entry" style="margin-top: 25px;">
+                    <div class="journal-header">
+                        <span>Journal : JOD</span>
+                        <span>Date : 31/12/2026</span>
+                    </div>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Compte</th>
+                                    <th>Libellé</th>
+                                    <th>Débit (€)</th>
+                                    <th>Crédit (€)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>6302</td>
+                                    <td>Dotation d'amortissement s/IC</td>
+                                    <td class="amount debit">5.525,00</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>2419</td>
+                                    <td>Amortissements actés sur voiture</td>
+                                    <td></td>
+                                    <td class="amount credit">5.525,00</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
 
-            // 7) Négation (171-200)
-            { id: 171, prompt: "Transforme à la forme négative : J’ai un stylo.", answer: "Je n’ai pas de stylo.", rule: "Après ne… pas, l’article indéfini (un, une, des) devient de ou d’ devant un complément direct." },
-            { id: 172, prompt: "Transforme : Elle a une voiture.", answer: "Elle n’a pas de voiture.", rule: "Négation : une -> de." },
-            { id: 173, prompt: "Transforme : Nous avons des amis.", answer: "Nous n’avons pas d’amis.", rule: "Négation : des -> de (d’ devant une voyelle)." },
-            { id: 174, prompt: "Transforme : Il boit du lait.", answer: "Il ne boit pas de lait.", rule: "Négation : article partitif (du, de la, de l’, des) devient de ou d’." },
-            { id: 175, prompt: "Transforme : Elle mange de la soupe.", answer: "Elle ne mange pas de soupe.", rule: "Négation : de la -> de." },
-            { id: 176, prompt: "Transforme : Il prend de l’eau.", answer: "Il ne prend pas d’eau.", rule: "Négation : de l’ -> d’ devant une voyelle." },
-            { id: 177, prompt: "Transforme : Je mange des légumes.", answer: "Je ne mange pas de légumes.", rule: "Négation : des (quantité indéfinie) -> de." },
-            { id: 178, prompt: "Complète : J’aime le café, mais je n’aime pas ___ thé. (le / du)", answer: "J’aime le café, mais je n’aime pas le thé.", rule: "L’article défini reste après la négation : le, la, l’, les ne changent pas." },
-            { id: 179, prompt: "Transforme : Il regarde la télévision.", answer: "Il ne regarde pas la télévision.", rule: "L’article défini ne change pas après ne… pas." },
-            { id: 180, prompt: "Transforme : Elle lit les journaux.", answer: "Elle ne lit pas les journaux.", rule: "L’article défini (les) est maintenu à la négation." },
-            { id: 181, prompt: "Je bois du café → Je ne bois pas ___ café.", answer: "Je ne bois pas de café.", rule: "Négation : du -> de." },
-            { id: 182, prompt: "Il achète une pizza → Il n’achète pas ___ pizza.", answer: "Il n’achète pas de pizza.", rule: "Négation : une -> de." },
-            { id: 183, prompt: "Ils ont des devoirs → Ils n’ont pas ___ devoirs.", answer: "Ils n’ont pas de devoirs.", rule: "Négation : des -> de." },
-            { id: 184, prompt: "Elle a de la patience → Elle n’a pas ___ patience.", answer: "Elle n’a pas de patience.", rule: "Négation : de la -> de." },
-            { id: 185, prompt: "Nous faisons du sport → Nous ne faisons pas ___ sport.", answer: "Nous ne faisons pas de sport.", rule: "Négation : du -> de." },
-            { id: 186, prompt: "Il y a des problèmes → Il n’y a pas ___ problèmes.", answer: "Il n’y a pas de problèmes.", rule: "Négation : des -> de." },
-            { id: 187, prompt: "Transforme : Je veux un café.", answer: "Je ne veux pas de café.", rule: "Négation : un -> de." },
-            { id: 188, prompt: "Transforme : Elle veut de l’eau.", answer: "Elle ne veut pas d’eau.", rule: "Négation : de l’ -> d’." },
-            { id: 189, prompt: "Transforme : Nous prenons des bus.", answer: "Nous ne prenons pas de bus.", rule: "Négation : des -> de." },
-            { id: 190, prompt: "Transforme : Il a des idées.", answer: "Il n’a pas d’idées.", rule: "Négation : des -> d’ devant une voyelle." },
-            { id: 191, prompt: "Transforme : Je connais un bon restaurant.", answer: "Je ne connais pas de bon restaurant.", rule: "Négation : un -> de, même si un adjectif suit." },
-            { id: 192, prompt: "Transforme : Elle achète des fruits.", answer: "Elle n’achète pas de fruits.", rule: "Négation : des -> de." },
-            { id: 193, prompt: "Complète : Je ne mange pas ___ viande, mais ___ poisson. (de la / du)", answer: "Je ne mange pas de viande, mais du poisson.", rule: "Opposition (mais) : on utilise de pour ce qui est nié ; on garde le partitif pour ce qui est affirmé après mais." },
-            { id: 194, prompt: "Complète : Il ne boit pas ___ vin, mais ___ eau. (du / de l’)", answer: "Il ne boit pas de vin, mais de l’eau.", rule: "Opposition : on garde le partitif pour ce qui est affirmé après mais." },
-            { id: 195, prompt: "Complète : Ce n’est pas ___ problème, c’est ___ erreur. (un / une)", answer: "Ce n’est pas un problème, c’est une erreur.", rule: "Exception : après le verbe être (attribut), l’article indéfini est souvent maintenu." },
-            { id: 196, prompt: "Complète : Ce ne sont pas ___ amis, ce sont ___ collègues. (des)", answer: "Ce ne sont pas des amis, ce sont des collègues.", rule: "Exception : après être (attribut), on maintient souvent des." },
-            { id: 197, prompt: "Complète : Je n’ai que ___ temps. (du / de)", answer: "Je n’ai que du temps.", rule: "Ne… que exprime une restriction, pas une négation complète : on maintient souvent l’article partitif." },
-            { id: 198, prompt: "Complète : Elle n’a que ___ idées simples. (des / de)", answer: "Elle n’a que des idées simples.", rule: "Ne… que (restriction) : on maintient souvent l’article indéfini (des)." },
-            { id: 199, prompt: "Transforme : Il y a du bruit.", answer: "Il n’y a pas de bruit.", rule: "Négation : du -> de." },
-            { id: 200, prompt: "Transforme : Il y a de l’espoir.", answer: "Il n’y a pas d’espoir.", rule: "Négation : de l’ -> d’." },
-        ];
+                <div class="fleur-de-lis">⚜</div>
+            </div>
+        </section>
 
-        const ITEMS_PER_LEVEL = 20;
-
-        function App() {
-            const [currentLevel, setCurrentLevel] = useState(null);
-            const [exerciseIndex, setExerciseIndex] = useState(0);
-            const [userInput, setUserInput] = useState('');
-            const [submittedInput, setSubmittedInput] = useState('');
-            const [showResult, setShowResult] = useState(false);
-            const [completedLevels, setCompletedLevels] = useState([]);
-
-            // Charger les niveaux complétés du localStorage
-            useEffect(() => {
-                const saved = localStorage.getItem('articles_french_progress');
-                if (saved) setCompletedLevels(JSON.parse(saved));
-            }, []);
-
-            // Sauvegarder les niveaux complétés
-            useEffect(() => {
-                localStorage.setItem('articles_french_progress', JSON.stringify(completedLevels));
-            }, [completedLevels]);
-
-            const currentLevelExercises = useMemo(() => {
-                if (currentLevel === null) return [];
-                return ALL_EXERCISES.slice((currentLevel - 1) * ITEMS_PER_LEVEL, currentLevel * ITEMS_PER_LEVEL);
-            }, [currentLevel]);
-
-            const currentExercise = currentLevelExercises[exerciseIndex];
-
-            const handleCheck = (e) => {
-                e.preventDefault();
-                if (!userInput.trim()) return;
-                setSubmittedInput(userInput);
-                setShowResult(true);
-            };
-
-            const handleNext = () => {
-                if (exerciseIndex < ITEMS_PER_LEVEL - 1) {
-                    setExerciseIndex(prev => prev + 1);
-                    setUserInput('');
-                    setSubmittedInput('');
-                    setShowResult(false);
-                } else {
-                    // Fin du niveau
-                    if (!completedLevels.includes(currentLevel)) {
-                        setCompletedLevels(prev => [...prev, currentLevel]);
-                    }
-                    setCurrentLevel(null);
-                    setExerciseIndex(0);
-                    setUserInput('');
-                    setSubmittedInput('');
-                    setShowResult(false);
-                }
-            };
-
-            const selectLevel = (lvl) => {
-                setCurrentLevel(lvl);
-                setExerciseIndex(0);
-                setUserInput('');
-                setSubmittedInput('');
-                setShowResult(false);
-            };
-
-            // Écran de sélection des niveaux
-            if (currentLevel === null) {
-                return (
-                    <div className="min-h-screen p-4 md:p-8 flex flex-col items-center">
-                        <div className="max-w-4xl w-full">
-                            <header className="text-center mb-12 fade-in">
-                                <div className="inline-block p-3 bg-blue-600 rounded-2xl shadow-xl mb-6 transform -rotate-3 hover:rotate-0 transition-transform duration-300">
-                                    <GraduationCap size={48} className="text-white" />
-                                </div>
-                                <h1 className="text-4xl md:text-5xl font-black text-slate-800 mb-4 tracking-tight">
-                                    Maîtrise des Articles
-                                </h1>
-                                <p className="text-lg text-slate-600 font-medium max-w-2xl mx-auto">
-                                    Travaillez vos articles (le, la, un, du...) avec 200 exercices progressifs niveau B1.
-                                </p>
-                            </header>
-
-                            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-6 mb-12">
-                                {Array.from({ length: 10 }, (_, i) => i + 1).map((lvl) => {
-                                    const isCompleted = completedLevels.includes(lvl);
-                                    return (
-                                        <button
-                                            key={lvl}
-                                            onClick={() => selectLevel(lvl)}
-                                            className={`
-                                                group relative aspect-square rounded-3xl flex flex-col items-center justify-center p-4 transition-all duration-300 transform hover:scale-105 active:scale-95 shadow-lg overflow-hidden
-                                                ${isCompleted 
-                                                    ? 'bg-emerald-50 border-4 border-emerald-500 text-emerald-700' 
-                                                    : 'bg-white border-4 border-blue-100 hover:border-blue-500 text-blue-700'}
-                                            `}
-                                        >
-                                            <div className={`absolute top-0 right-0 p-2 opacity-10 group-hover:opacity-20 transition-opacity ${isCompleted ? 'text-emerald-500' : 'text-blue-500'}`}>
-                                                {isCompleted ? <Trophy size={64} /> : <BookOpen size={64} />}
-                                            </div>
-                                            <span className="text-xs uppercase font-black tracking-widest mb-1 opacity-70">Niveau</span>
-                                            <span className="text-5xl font-black">{lvl}</span>
-                                            {isCompleted && (
-                                                <span className="mt-2 text-[10px] font-black uppercase tracking-tighter bg-emerald-500 text-white px-2 py-1 rounded-full animate-pulse">
-                                                    Complété !
-                                                </span>
-                                            )}
-                                        </button>
-                                    );
-                                })}
+        <!-- NIVEAU 2: La Facture -->
+        <section id="level2" class="level-panel">
+            <div class="card">
+                <h2 class="card-title"><span class="icon">📋</span> Facture de Vente de la Voiture</h2>
+                
+                <div class="highlight-purple" style="margin-bottom: 20px;">
+                    <p class="label">⚠️ ATTENTION - Règle spéciale TVA pour la vente d'une voiture :</p>
+                    <p>Puisque nous n'avons pu récupérer que 50% de la TVA lors de l'achat, la TVA sur la facture de vente se calcule également sur <strong>50% du prix de vente HTVA</strong>.</p>
+                    <p><strong>TVA = 21% × 50% × 15.000 € = 1.575 €</strong></p>
+                </div>
+                
+                <div class="invoice">
+                    <div class="invoice-header">
+                        <div>
+                            <p class="invoice-company">VOTRE ENTREPRISE SRL</p>
+                            <div class="invoice-details">
+                                Rue de l'Industrie, 45<br>
+                                6000 Charleroi<br>
+                                TVA : BE 0123.456.789
                             </div>
-
-                            <footer className="text-center text-slate-400 text-sm font-medium border-t border-slate-200 pt-8">
-                                <p>Structure No-Build • React 19 • Tailwind JIT • ESM</p>
-                            </footer>
+                        </div>
+                        <div class="invoice-number">
+                            <p style="font-size: 1.5rem; margin-bottom: 10px;">FACTURE</p>
+                            <p><strong>N° :</strong> 2027/VT/002</p>
+                            <p><strong>Date :</strong> 01/12/2027</p>
                         </div>
                     </div>
-                );
-            }
 
-            // Écran d'exercice
-            return (
-                <div className="min-h-screen flex flex-col items-center p-4 md:p-8">
-                    <div className="max-w-2xl w-full">
-                        {/* Navigation et Progrès */}
-                        <div className="flex items-center justify-between mb-8 fade-in">
-                            <button 
-                                onClick={() => setCurrentLevel(null)}
-                                className="flex items-center gap-2 text-slate-500 hover:text-blue-600 font-bold transition-colors group"
-                            >
-                                <ArrowLeft size={20} className="group-hover:-translate-x-1 transition-transform" />
-                                Menu
-                            </button>
-                            <div className="flex flex-col items-end">
-                                <span className="text-xs font-black text-slate-400 uppercase tracking-widest">Niveau {currentLevel}</span>
-                                <span className="text-xl font-black text-blue-600">{exerciseIndex + 1} / {ITEMS_PER_LEVEL}</span>
-                            </div>
+                    <div style="margin-bottom: 30px;">
+                        <p style="font-weight: 600; margin-bottom: 10px;">FACTURÉ À :</p>
+                        <div class="invoice-details">
+                            <strong>GARAGE CENTRAL SPRL</strong><br>
+                            Chaussée de Bruxelles, 234<br>
+                            7100 La Louvière<br>
+                            TVA : BE 0876.543.210
+                        </div>
+                    </div>
+
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Description</th>
+                                    <th>Détails</th>
+                                    <th style="text-align: right;">Montant (€)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td colspan="3" style="background: var(--parchment-dark); font-weight: 600;">
+                                        VENTE DE VÉHICULE - ACTIF IMMOBILISÉ
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Voiture Citroën C4</strong></td>
+                                    <td>
+                                        Véhicule de tourisme<br>
+                                        <small>Acquisition : 01/01/2025</small><br>
+                                        <small>Immatriculation : 1-XYZ-789</small><br>
+                                        <small>Kilométrage : 85.000 km</small>
+                                    </td>
+                                    <td class="amount">15.000,00</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div style="margin-top: 30px; text-align: right;">
+                        <table style="width: auto; margin-left: auto;">
+                            <tr>
+                                <td style="text-align: right; padding-right: 30px;"><strong>Montant HTVA :</strong></td>
+                                <td class="amount" style="min-width: 150px;">15.000,00 €</td>
+                            </tr>
+                            <tr style="background: rgba(75, 0, 130, 0.1);">
+                                <td style="text-align: right; padding-right: 30px;"><strong class="special">TVA 21% × 50% :</strong></td>
+                                <td class="amount special">1.575,00 €</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="invoice-total">
+                        TOTAL TVAC : 16.575,00 €
+                    </div>
+
+                    <div style="margin-top: 30px; font-size: 0.9rem; color: var(--ink-light);">
+                        <p><strong>Conditions de paiement :</strong> 30 jours fin de mois</p>
+                        <p><strong>IBAN :</strong> BE12 3456 7890 1234</p>
+                        <p style="margin-top: 15px; font-style: italic; color: var(--purple-ink);">
+                            ⚠️ <strong>TVA réduite :</strong> Conformément à la législation belge, la TVA sur la vente d'un véhicule 
+                            pour lequel la TVA n'a été récupérable qu'à 50% lors de l'achat est calculée sur 50% du prix de vente.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Accordéon pour voir le niveau 1 -->
+            <div class="accordion">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <span>📜 Consulter le Niveau I - L'Énoncé et le Tableau d'Amortissement</span>
+                    <span class="arrow">▼</span>
+                </div>
+                <div class="accordion-content" id="accordion-level1">
+                    <p style="margin-bottom: 15px;"><strong>Rappel de l'énoncé :</strong></p>
+                    <p>Achat voiture Citroën C4 le 01/01/2025 : 20.000 € HTVA</p>
+                    <p><span class="special">Valeur comptable : 22.100 € (TVA 50% non récup. incluse)</span></p>
+                    <p>Vente le 01/12/2027 : 15.000 € HTVA (Hypothèse 1)</p>
+                    <p>Amortissement linéaire sur 4 ans : 5.525 €/an</p>
+                    <div class="decorative-line"></div>
+                    <p><strong>Amortissements déjà comptabilisés :</strong></p>
+                    <p>• 2025 : 5.525,00 €</p>
+                    <p>• 2026 : 5.525,00 €</p>
+                    <p><strong>Total au 31/12/2026 : 11.050,00 €</strong></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- NIVEAU 3: Les Étapes -->
+        <section id="level3" class="level-panel">
+            <div class="steps-indicator">
+                <div class="step-dot active" onclick="showStep(1)">
+                    <div class="step-number">1</div>
+                    <span class="step-label">Éléments de la facture</span>
+                </div>
+                <div class="step-dot" onclick="showStep(2)">
+                    <div class="step-number">2</div>
+                    <span class="step-label">VCN & Dernier amort.</span>
+                </div>
+                <div class="step-dot" onclick="showStep(3)">
+                    <div class="step-number">3</div>
+                    <span class="step-label">Résultat de vente</span>
+                </div>
+            </div>
+
+            <!-- Étape 1 -->
+            <div id="step1" class="step-content">
+                <div class="card">
+                    <h2 class="card-title"><span class="icon">1️⃣</span> Étape 1 : Déterminer les éléments de la facture de vente</h2>
+                    
+                    <div class="highlight-purple" style="margin-bottom: 20px;">
+                        <p class="label">⚠️ N'oubliez pas la règle spéciale !</p>
+                        <p>TVA = Prix HTVA × 21% × <strong>50%</strong></p>
+                    </div>
+                    
+                    <p style="margin-bottom: 20px; color: var(--ink-light); font-style: italic;">
+                        Complétez les montants de la facture de vente. Le prix de vente est de <strong>15.000 € HTVA</strong>.
+                    </p>
+
+                    <div class="input-group">
+                        <label for="step1-htva">Montant HTVA :</label>
+                        <input type="text" id="step1-htva" class="input-field" placeholder="Entrez le montant...">
+                        <span class="unit">€</span>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="step1-tva" class="special">Montant TVA (21% × 50%) :</label>
+                        <input type="text" id="step1-tva" class="input-field special-input highlight" placeholder="Attention : TVA à 50% !">
+                        <span class="unit">€</span>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="step1-tvac">Montant TVAC :</label>
+                        <input type="text" id="step1-tvac" class="input-field" placeholder="Entrez le montant...">
+                        <span class="unit">€</span>
+                    </div>
+
+                    <div style="margin-top: 20px;">
+                        <button class="btn btn-primary" onclick="checkStep1()">✓ Vérifier mes réponses</button>
+                        <button class="btn btn-reveal" onclick="revealStep1()">Voir les réponses</button>
+                    </div>
+
+                    <div id="feedback-step1" class="feedback"></div>
+
+                    <div id="result-step1" style="display: none;" class="result-display">
+                        <p><strong>Récapitulatif :</strong></p>
+                        <p>15.000,00 € HTVA</p>
+                        <p style="border-bottom: 1px solid var(--purple-ink); display: inline-block; color: var(--purple-ink);">+ 1.575,00 € TVA (21% × 50%)</p>
+                        <p style="font-size: 1.5rem; margin-top: 10px;"><strong>= 16.575,00 € TVAC</strong></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Étape 2 -->
+            <div id="step2" class="step-content" style="display: none;">
+                <div class="card">
+                    <h2 class="card-title"><span class="icon">2️⃣</span> Étape 2 : Déterminer la Valeur Comptable Nette (VCN)</h2>
+                    <p style="margin-bottom: 20px; color: var(--ink-light); font-style: italic;">
+                        Calculez la VCN au jour de la vente (01/12/2027). N'oubliez pas l'amortissement de l'année 2027 !<br>
+                        <strong>Attention :</strong> On ne prend pas le jour de la vente. Du 01/01 au 30/11 = 334 jours.
+                    </p>
+                    
+                    <div class="highlight-purple" style="margin-bottom: 20px;">
+                        <p class="label">📌 Rappel important :</p>
+                        <p>La valeur d'acquisition est de <strong>22.100 €</strong> (et non 20.000 €) car elle inclut les 50% de TVA non récupérable !</p>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="step2-val-acq" class="special">Valeur d'acquisition (avec TVA non récup.) :</label>
+                        <input type="text" id="step2-val-acq" class="input-field special-input" placeholder="Attention : inclut 50% TVA !">
+                        <span class="unit">€</span>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="step2-amort-2025">Amortissement 2025 :</label>
+                        <input type="text" id="step2-amort-2025" class="input-field" placeholder="Entrez le montant...">
+                        <span class="unit">€</span>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="step2-amort-2026">Amortissement 2026 :</label>
+                        <input type="text" id="step2-amort-2026" class="input-field" placeholder="Entrez le montant...">
+                        <span class="unit">€</span>
+                    </div>
+
+                    <div class="input-group highlight">
+                        <label for="step2-amort-2027">Amortissement 2027 (prorata 334 jours) :</label>
+                        <input type="text" id="step2-amort-2027" class="input-field" placeholder="334 jours sur 365...">
+                        <span class="unit">€</span>
+                    </div>
+
+                    <p style="font-size: 0.9rem; color: var(--ink-light); margin: 10px 0;">
+                        💡 Calcul prorata 2027 : 5.525 × 334 / 365 = ?
+                    </p>
+
+                    <div style="margin-top: 20px;">
+                        <button class="btn btn-primary" onclick="checkStep2()">✓ Vérifier mes réponses</button>
+                        <button class="btn btn-reveal" onclick="revealStep2()">Voir les réponses</button>
+                    </div>
+
+                    <div id="feedback-step2" class="feedback"></div>
+
+                    <div id="result-step2" style="display: none;">
+                        <div class="result-display">
+                            <p><strong>Calcul de la VCN au 01/12/2027 :</strong></p>
+                            <p>Valeur d'acquisition : <span class="special">22.100,00 €</span></p>
+                            <p>- Amort. 2025 : 5.525,00 €</p>
+                            <p>- Amort. 2026 : 5.525,00 €</p>
+                            <p style="border-bottom: 1px solid var(--gold); display: inline-block;">- Amort. 2027 : 5.055,75 €</p>
+                            <p style="font-size: 1.3rem; margin-top: 10px;">Total amortissements : <strong>16.105,75 €</strong></p>
+                            <p style="font-size: 1.5rem; margin-top: 10px; color: var(--sepia);"><strong>VCN = 5.994,25 €</strong></p>
                         </div>
 
-                        {/* Barre de progression */}
-                        <div className="w-full bg-slate-200 h-4 rounded-full mb-10 shadow-inner overflow-hidden">
-                            <div 
-                                className="bg-gradient-to-r from-blue-400 to-blue-600 h-full transition-all duration-700 ease-out"
-                                style={{ width: `${((exerciseIndex + 1) / ITEMS_PER_LEVEL) * 100}%` }}
-                            ></div>
-                        </div>
-
-                        {/* Carte d'exercice */}
-                        <div className="bg-white rounded-[2.5rem] shadow-2xl p-8 md:p-12 border border-blue-100 relative overflow-hidden fade-in">
-                            <div className="absolute top-0 left-0 w-2 h-full bg-blue-600"></div>
-                            
-                            <div className="mb-10">
-                                <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-50 text-blue-600 rounded-full text-xs font-black uppercase tracking-wider mb-6">
-                                    <BookOpen size={14} />
-                                    Exercice n°{currentExercise.id}
+                        <div class="card" style="margin-top: 20px;">
+                            <h3 style="font-family: 'Cinzel', serif; margin-bottom: 15px;">📝 Dernière écriture d'amortissement à passer</h3>
+                            <div class="journal-entry">
+                                <div class="journal-header">
+                                    <span>Journal : JOD</span>
+                                    <span>Date : 01/12/2027</span>
                                 </div>
-                                <h2 className="text-2xl md:text-3xl font-bold text-slate-800 leading-tight">
-                                    {currentExercise.prompt}
-                                </h2>
+                                <div class="table-container">
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>Compte</th>
+                                                <th>Libellé</th>
+                                                <th>Débit (€)</th>
+                                                <th>Crédit (€)</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>6302</td>
+                                                <td>Dotation d'amortissement s/IC</td>
+                                                <td class="amount debit">5.055,75</td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td>2419</td>
+                                                <td>Amortissements actés sur voiture</td>
+                                                <td></td>
+                                                <td class="amount credit">5.055,75</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
-
-                            {!showResult ? (
-                                <form onSubmit={handleCheck} className="space-y-8">
-                                    <div className="relative group">
-                                        <input
-                                            type="text"
-                                            autoFocus
-                                            value={userInput}
-                                            onChange={(e) => setUserInput(e.target.value)}
-                                            placeholder="Complétez la phrase..."
-                                            className="w-full text-xl md:text-2xl p-6 bg-slate-50 border-4 border-slate-100 rounded-3xl focus:border-blue-500 focus:bg-white focus:outline-none transition-all duration-300 shadow-sm group-hover:border-blue-200"
-                                        />
-                                    </div>
-                                    <button 
-                                        type="submit"
-                                        disabled={!userInput.trim()}
-                                        className="w-full group bg-blue-600 hover:bg-blue-700 disabled:bg-slate-300 text-white font-black text-lg py-6 rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 active:scale-[0.98] flex items-center justify-center gap-3"
-                                    >
-                                        Vérifier la réponse
-                                        <ChevronRight className="group-hover:translate-x-1 transition-transform" />
-                                    </button>
-                                </form>
-                            ) : (
-                                <div className="space-y-8 animate-in fade-in duration-500">
-                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                        <div className="p-6 bg-slate-50 rounded-3xl border-2 border-slate-200 relative">
-                                            <span className="absolute -top-3 left-6 px-3 py-1 bg-slate-200 text-slate-500 rounded-full text-[10px] font-black uppercase tracking-widest">
-                                                Votre réponse
-                                            </span>
-                                            <p className="text-xl font-bold text-slate-700 mt-2">
-                                                {submittedInput}
-                                            </p>
-                                        </div>
-                                        <div className="p-6 bg-emerald-50 rounded-3xl border-2 border-emerald-200 relative">
-                                            <span className="absolute -top-3 left-6 px-3 py-1 bg-emerald-500 text-white rounded-full text-[10px] font-black uppercase tracking-widest">
-                                                Bonne réponse
-                                            </span>
-                                            <p className="text-xl font-black text-emerald-800 mt-2">
-                                                {currentExercise.answer}
-                                            </p>
-                                            <div className="absolute top-4 right-4 text-emerald-500">
-                                                <CheckCircle2 size={24} />
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div className="p-8 bg-amber-50 rounded-3xl border-2 border-amber-100 relative group">
-                                        <div className="absolute top-4 right-6 text-amber-200 group-hover:text-amber-300 transition-colors">
-                                            <Info size={48} />
-                                        </div>
-                                        <span className="block text-xs font-black text-amber-600 uppercase tracking-widest mb-3">La règle de grammaire :</span>
-                                        <p className="text-amber-900 font-bold italic leading-relaxed text-lg relative z-10">
-                                            {currentExercise.rule}
-                                        </p>
-                                    </div>
-
-                                    <button 
-                                        onClick={handleNext}
-                                        className="w-full bg-orange-500 hover:bg-orange-600 text-white font-black text-xl py-6 rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 active:scale-[0.98] flex items-center justify-center gap-3"
-                                    >
-                                        {exerciseIndex < ITEMS_PER_LEVEL - 1 ? "Exercice suivant" : "Terminer le niveau"}
-                                        <ChevronRight />
-                                    </button>
-                                </div>
-                            )}
                         </div>
                     </div>
                 </div>
-            );
+            </div>
+
+            <!-- Étape 3 -->
+            <div id="step3" class="step-content" style="display: none;">
+                <div class="card">
+                    <h2 class="card-title"><span class="icon">3️⃣</span> Étape 3 : Déterminer le résultat de la vente</h2>
+                    <p style="margin-bottom: 20px; color: var(--ink-light); font-style: italic;">
+                        Comparez le prix de vente avec la VCN pour déterminer s'il y a une plus-value ou une moins-value.
+                    </p>
+
+                    <div class="input-group">
+                        <label for="step3-pv">Prix de Vente (HTVA) :</label>
+                        <input type="text" id="step3-pv" class="input-field" placeholder="Entrez le montant...">
+                        <span class="unit">€</span>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="step3-vcn">Valeur Comptable Nette :</label>
+                        <input type="text" id="step3-vcn" class="input-field" placeholder="Entrez le montant...">
+                        <span class="unit">€</span>
+                    </div>
+
+                    <div style="margin-top: 20px;">
+                        <button class="btn btn-primary" onclick="checkStep3()">✓ Vérifier mes réponses</button>
+                        <button class="btn btn-reveal" onclick="revealStep3()">Voir les réponses</button>
+                    </div>
+
+                    <div id="feedback-step3" class="feedback"></div>
+
+                    <div id="result-step3" style="display: none;">
+                        <div class="result-display result-positive">
+                            <p><strong>Calcul du résultat :</strong></p>
+                            <p>Prix de Vente : 15.000,00 €</p>
+                            <p style="border-bottom: 1px solid var(--green-ink); display: inline-block;">- VCN : 5.994,25 €</p>
+                            <p style="font-size: 1.8rem; margin-top: 15px;">
+                                <strong>= + 9.005,75 €</strong>
+                            </p>
+                            <p style="font-size: 1.3rem; margin-top: 10px;">
+                                🎉 <strong>PLUS-VALUE DE RÉALISATION</strong><br>
+                                <small>(Soit un PROFIT sur la vente de la voiture !)</small>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Accordéons de référence -->
+            <div class="accordion">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <span>📜 Consulter le Niveau I - Tableau d'Amortissement</span>
+                    <span class="arrow">▼</span>
+                </div>
+                <div class="accordion-content">
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Année</th>
+                                    <th>Amortissement</th>
+                                    <th>VCN</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>2025</td><td>5.525,00 €</td><td>16.575,00 €</td></tr>
+                                <tr><td>2026</td><td>5.525,00 €</td><td>11.050,00 €</td></tr>
+                                <tr style="background: rgba(0, 100, 0, 0.2);"><td>2027</td><td>5.055,75 € (prorata)</td><td>5.994,25 €</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p class="special" style="margin-top: 10px;">Rappel : Valeur d'acquisition = 22.100 € (inclut 50% TVA non récup.)</p>
+                </div>
+            </div>
+
+            <div class="accordion">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <span>📋 Consulter le Niveau II - Facture de Vente</span>
+                    <span class="arrow">▼</span>
+                </div>
+                <div class="accordion-content">
+                    <p><strong>Facture N° 2027/VT/002</strong> - Date : 01/12/2027</p>
+                    <p>Vente de la voiture Citroën C4 :</p>
+                    <p>• HTVA : 15.000,00 €</p>
+                    <p class="special">• TVA 21% × 50% : 1.575,00 €</p>
+                    <p>• <strong>TVAC : 16.575,00 €</strong></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- NIVEAU 4: L'Écriture -->
+        <section id="level4" class="level-panel">
+            <div class="card">
+                <h2 class="card-title"><span class="icon">📖</span> Niveau IV : Comptabiliser l'écriture de vente</h2>
+                <p style="margin-bottom: 20px; color: var(--ink-light); font-style: italic;">
+                    Complétez l'écriture de vente dans le Journal des Ventes.<br>
+                    <strong>Rappel :</strong> Les débits = Les crédits
+                </p>
+                
+                <div class="highlight-purple" style="margin-bottom: 20px;">
+                    <p class="label">📌 Points clés à retenir :</p>
+                    <p>• Valeur de la voiture (2410) : <strong>22.100 €</strong> (et non 20.000 €)</p>
+                    <p>• TVA à payer (4510) : <strong>1.575 €</strong> (21% × 50%)</p>
+                    <p>• Amortissements actés (2419) : <strong>16.105,75 €</strong></p>
+                    <p>• Plus-value (7630) : <strong>9.005,75 €</strong></p>
+                </div>
+
+                <div class="journal-entry">
+                    <div class="journal-header">
+                        <span>Journal : JV (Ventes)</span>
+                        <span>Date : 01/12/2027</span>
+                    </div>
+                    <div class="table-container">
+                        <table class="journal-table">
+                            <thead>
+                                <tr>
+                                    <th style="width: 15%;">Compte</th>
+                                    <th style="width: 35%;">Libellé</th>
+                                    <th style="width: 25%;">Débit (€)</th>
+                                    <th style="width: 25%;">Crédit (€)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><input type="text" id="j-compte1" placeholder="N° compte"></td>
+                                    <td><input type="text" id="j-libelle1" placeholder="Libellé"></td>
+                                    <td><input type="text" id="j-debit1" placeholder="Débit"></td>
+                                    <td><input type="text" id="j-credit1" placeholder="Crédit"></td>
+                                </tr>
+                                <tr>
+                                    <td><input type="text" id="j-compte2" placeholder="N° compte"></td>
+                                    <td><input type="text" id="j-libelle2" placeholder="Libellé"></td>
+                                    <td><input type="text" id="j-debit2" placeholder="Débit"></td>
+                                    <td><input type="text" id="j-credit2" placeholder="Crédit"></td>
+                                </tr>
+                                <tr>
+                                    <td><input type="text" id="j-compte3" placeholder="N° compte"></td>
+                                    <td><input type="text" id="j-libelle3" placeholder="Libellé"></td>
+                                    <td><input type="text" id="j-debit3" placeholder="Débit"></td>
+                                    <td><input type="text" id="j-credit3" placeholder="Crédit"></td>
+                                </tr>
+                                <tr>
+                                    <td><input type="text" id="j-compte4" placeholder="N° compte"></td>
+                                    <td><input type="text" id="j-libelle4" placeholder="Libellé"></td>
+                                    <td><input type="text" id="j-debit4" placeholder="Débit"></td>
+                                    <td><input type="text" id="j-credit4" placeholder="Crédit"></td>
+                                </tr>
+                                <tr>
+                                    <td><input type="text" id="j-compte5" placeholder="N° compte"></td>
+                                    <td><input type="text" id="j-libelle5" placeholder="Libellé"></td>
+                                    <td><input type="text" id="j-debit5" placeholder="Débit"></td>
+                                    <td><input type="text" id="j-credit5" placeholder="Crédit"></td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr style="background: var(--gold-light);">
+                                    <td colspan="2" style="text-align: right; font-weight: bold;">TOTAUX :</td>
+                                    <td id="total-debit" class="amount" style="font-weight: bold;">0,00</td>
+                                    <td id="total-credit" class="amount" style="font-weight: bold;">0,00</td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+
+                <div style="margin-top: 20px;">
+                    <button class="btn btn-primary" onclick="calculateTotals()">🔢 Calculer les totaux</button>
+                    <button class="btn btn-primary" onclick="checkJournal()">✓ Vérifier mon écriture</button>
+                    <button class="btn btn-reveal" onclick="revealJournal()">Voir la correction</button>
+                </div>
+
+                <div id="feedback-journal" class="feedback"></div>
+            </div>
+
+            <!-- Correction -->
+            <div id="correction-journal" class="card" style="display: none;">
+                <h2 class="card-title"><span class="icon">✅</span> Correction - Écriture de Vente (Plus-value)</h2>
+                
+                <div class="journal-entry">
+                    <div class="journal-header">
+                        <span>Journal : JV</span>
+                        <span>Date : 01/12/2027</span>
+                    </div>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Compte</th>
+                                    <th>Libellé</th>
+                                    <th>Débit (€)</th>
+                                    <th>Crédit (€)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>4000</strong></td>
+                                    <td>Client</td>
+                                    <td class="amount debit"><strong>16.575,00</strong></td>
+                                    <td></td>
+                                </tr>
+                                <tr style="background: rgba(75, 0, 130, 0.1);">
+                                    <td><strong class="special">4510</strong></td>
+                                    <td class="special">TVA à payer (21% × 50%)</td>
+                                    <td></td>
+                                    <td class="amount credit special"><strong>1.575,00</strong></td>
+                                </tr>
+                                <tr style="background: rgba(75, 0, 130, 0.1);">
+                                    <td><strong class="special">2410</strong></td>
+                                    <td class="special">Voiture (valeur + 50% TVA non récup.)</td>
+                                    <td></td>
+                                    <td class="amount credit special"><strong>22.100,00</strong></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>2419</strong></td>
+                                    <td>Amortissements actés s/voiture</td>
+                                    <td class="amount debit"><strong>16.105,75</strong></td>
+                                    <td></td>
+                                </tr>
+                                <tr style="background: rgba(0, 100, 0, 0.1);">
+                                    <td><strong style="color: var(--green-ink);">7630</strong></td>
+                                    <td><strong style="color: var(--green-ink);">Plus-value de réalisation</strong></td>
+                                    <td></td>
+                                    <td class="amount credit"><strong style="color: var(--green-ink);">9.005,75</strong></td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr style="background: var(--gold-light);">
+                                    <td colspan="2" style="text-align: right; font-weight: bold;">TOTAUX :</td>
+                                    <td class="amount" style="font-weight: bold;">32.680,75</td>
+                                    <td class="amount" style="font-weight: bold;">32.680,75</td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+
+                <div style="margin-top: 20px; padding: 20px; background: rgba(0, 100, 0, 0.1); border: 2px solid var(--green-ink);">
+                    <h3 style="font-family: 'Cinzel', serif; color: var(--green-ink); margin-bottom: 15px;">📚 Explication de l'écriture</h3>
+                    <p><strong>DÉBITS :</strong></p>
+                    <p>• <strong>4000 Client</strong> : Montant TVAC de la facture (16.575 €) - C'est notre créance</p>
+                    <p>• <strong>2419 Amort. actés</strong> : On "vide" le compte des amortissements (16.105,75 €)</p>
+                    <br>
+                    <p><strong>CRÉDITS :</strong></p>
+                    <p>• <strong class="special">4510 TVA à payer</strong> : TVA collectée sur la vente (<strong>1.575 €</strong> = 21% × 50% × 15.000)</p>
+                    <p>• <strong class="special">2410 Voiture</strong> : On "sort" le bien à sa valeur d'origine (<strong>22.100 €</strong> incluant 50% TVA non récup.)</p>
+                    <p>• <strong style="color: var(--green-ink);">7630 Plus-value</strong> : Le bénéfice réalisé sur la vente (9.005,75 €)</p>
+                </div>
+
+                <div class="highlight-purple" style="margin-top: 20px;">
+                    <h3 style="font-family: 'Cinzel', serif; color: var(--purple-ink); margin-bottom: 15px;">🚗 Récapitulatif des particularités "Voiture"</h3>
+                    <p><strong>À l'achat :</strong> TVA récupérable à 50% seulement → La partie non récupérable (2.100 €) s'ajoute au coût d'acquisition</p>
+                    <p><strong>À la vente :</strong> TVA calculée sur 50% du prix de vente → TVA = 15.000 × 21% × 50% = 1.575 €</p>
+                    <p><strong>Valeur du bien :</strong> 22.100 € (et non 20.000 €)</p>
+                </div>
+            </div>
+
+            <!-- Accordéons de référence -->
+            <div class="accordion">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <span>📊 Récapitulatif des 3 étapes</span>
+                    <span class="arrow">▼</span>
+                </div>
+                <div class="accordion-content">
+                    <p><strong>Étape 1 - Facture :</strong></p>
+                    <p>HTVA : 15.000 € | <span class="special">TVA (21%×50%) : 1.575 €</span> | TVAC : 16.575 €</p>
+                    <div class="decorative-line"></div>
+                    <p><strong>Étape 2 - VCN au 01/12/2027 :</strong></p>
+                    <p>Val. acquisition : <span class="special">22.100 €</span> - Amortissements : 16.105,75 € = <strong>VCN : 5.994,25 €</strong></p>
+                    <div class="decorative-line"></div>
+                    <p><strong>Étape 3 - Résultat :</strong></p>
+                    <p style="color: var(--green-ink);">PV (15.000) - VCN (5.994,25) = <strong>Plus-value : 9.005,75 €</strong></p>
+                </div>
+            </div>
+
+            <div class="accordion">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <span>📖 Aide-mémoire : Comptes à utiliser</span>
+                    <span class="arrow">▼</span>
+                </div>
+                <div class="accordion-content">
+                    <table>
+                        <tr><td><strong>2410</strong></td><td>Matériel roulant (Voiture) - <span class="special">Valeur incluant 50% TVA non récup.</span></td></tr>
+                        <tr><td><strong>2419</strong></td><td>Amortissements actés sur matériel roulant</td></tr>
+                        <tr><td><strong>4000</strong></td><td>Clients</td></tr>
+                        <tr><td><strong>4510</strong></td><td>TVA à payer - <span class="special">21% × 50% du prix de vente</span></td></tr>
+                        <tr><td><strong>6630</strong></td><td>Moins-value de réalisation (perte)</td></tr>
+                        <tr style="background: rgba(0, 100, 0, 0.15);"><td><strong style="color: var(--green-ink);">7630</strong></td><td><strong style="color: var(--green-ink);">Plus-value de réalisation (profit) — Au crédit</strong></td></tr>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <footer style="text-align: center; padding: 40px 20px; margin-top: 40px; border-top: 3px double var(--gold);">
+            <div class="fleur-de-lis">🚗 ⚜ 🚗</div>
+            <p style="font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.1rem; color: var(--ink-light);">
+                "L'apprentissage est le seul trésor qui suit son maître partout"
+            </p>
+            <p style="font-size: 0.9rem; color: var(--gold-dark); margin-top: 15px;">
+                Application pédagogique — Comptabilité 6ᵉ année secondaire technique<br>
+                <strong style="color: var(--purple-ink);">Exercice 2 : Vente de Voiture avec TVA à 50%</strong>
+            </p>
+        </footer>
+    </div>
+
+    <script>
+        // Valeurs correctes pour la VOITURE
+        const CORRECT_VALUES = {
+            step1: {
+                htva: 15000,
+                tva: 1575,      // 15000 × 21% × 50%
+                tvac: 16575
+            },
+            step2: {
+                valAcq: 22100,  // 20000 + 2100 (50% TVA non récup.)
+                amort2025: 5525,
+                amort2026: 5525,
+                amort2027: 5055.75,  // 5525 × 334/365
+                vcn: 5994.25
+            },
+            step3: {
+                pv: 15000,
+                vcn: 5994.25,
+                resultat: 9005.75
+            },
+            journal: {
+                totalDebit: 32680.75,
+                totalCredit: 32680.75
+            }
+        };
+
+        // Navigation entre niveaux
+        function showLevel(level) {
+            document.querySelectorAll('.level-panel').forEach(panel => {
+                panel.classList.remove('active');
+            });
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            document.getElementById('level' + level).classList.add('active');
+            document.querySelectorAll('.nav-btn')[level - 1].classList.add('active');
         }
 
-        // --- Montage ---
-        const container = document.getElementById('root');
-        if (container) {
-            const root = createRoot(container);
-            root.render(<App />);
+        // Navigation entre étapes (niveau 3)
+        function showStep(step) {
+            document.querySelectorAll('.step-content').forEach(content => {
+                content.style.display = 'none';
+            });
+            document.querySelectorAll('.step-dot').forEach(dot => {
+                dot.classList.remove('active');
+            });
+            
+            document.getElementById('step' + step).style.display = 'block';
+            document.querySelectorAll('.step-dot')[step - 1].classList.add('active');
         }
+
+        // Toggle accordion
+        function toggleAccordion(header) {
+            header.classList.toggle('open');
+            const content = header.nextElementSibling;
+            content.classList.toggle('open');
+        }
+
+        // Parse number from input
+        function parseNumber(value) {
+            if (!value) return NaN;
+            value = value.replace(/\s/g, '').replace(',', '.').replace('€', '');
+            return parseFloat(value);
+        }
+
+        // Check if values are approximately equal
+        function isApproxEqual(a, b, tolerance = 1) {
+            return Math.abs(a - b) <= tolerance;
+        }
+
+        // Format number
+        function formatNumber(num) {
+            return num.toLocaleString('fr-BE', {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            });
+        }
+
+        // Étape 1 - Vérification
+        function checkStep1() {
+            const htva = parseNumber(document.getElementById('step1-htva').value);
+            const tva = parseNumber(document.getElementById('step1-tva').value);
+            const tvac = parseNumber(document.getElementById('step1-tvac').value);
+            
+            let correct = 0;
+            let total = 3;
+            
+            const htvaField = document.getElementById('step1-htva');
+            const tvaField = document.getElementById('step1-tva');
+            const tvacField = document.getElementById('step1-tvac');
+            
+            if (isApproxEqual(htva, CORRECT_VALUES.step1.htva)) {
+                htvaField.classList.add('correct');
+                htvaField.classList.remove('incorrect');
+                correct++;
+            } else {
+                htvaField.classList.add('incorrect');
+                htvaField.classList.remove('correct');
+            }
+            
+            if (isApproxEqual(tva, CORRECT_VALUES.step1.tva)) {
+                tvaField.classList.add('correct');
+                tvaField.classList.remove('incorrect');
+                correct++;
+            } else {
+                tvaField.classList.add('incorrect');
+                tvaField.classList.remove('correct');
+            }
+            
+            if (isApproxEqual(tvac, CORRECT_VALUES.step1.tvac)) {
+                tvacField.classList.add('correct');
+                tvacField.classList.remove('incorrect');
+                correct++;
+            } else {
+                tvacField.classList.add('incorrect');
+                tvacField.classList.remove('correct');
+            }
+            
+            const feedback = document.getElementById('feedback-step1');
+            if (correct === total) {
+                feedback.className = 'feedback success';
+                feedback.innerHTML = '🎉 Excellent ! Vous avez bien appliqué la règle des 50% de TVA !';
+                document.getElementById('result-step1').style.display = 'block';
+                document.querySelectorAll('.step-dot')[0].classList.add('completed');
+            } else {
+                feedback.className = 'feedback error';
+                feedback.innerHTML = `⚠️ ${correct}/${total} réponses correctes. N'oubliez pas : TVA = 21% × 50% × Prix HTVA !`;
+            }
+        }
+
+        function revealStep1() {
+            document.getElementById('step1-htva').value = formatNumber(CORRECT_VALUES.step1.htva);
+            document.getElementById('step1-tva').value = formatNumber(CORRECT_VALUES.step1.tva);
+            document.getElementById('step1-tvac').value = formatNumber(CORRECT_VALUES.step1.tvac);
+            document.getElementById('result-step1').style.display = 'block';
+            document.querySelectorAll('.step-dot')[0].classList.add('completed');
+            
+            ['step1-htva', 'step1-tva', 'step1-tvac'].forEach(id => {
+                document.getElementById(id).classList.add('correct');
+                document.getElementById(id).classList.remove('incorrect');
+            });
+        }
+
+        // Étape 2 - Vérification
+        function checkStep2() {
+            const valAcq = parseNumber(document.getElementById('step2-val-acq').value);
+            const amort2025 = parseNumber(document.getElementById('step2-amort-2025').value);
+            const amort2026 = parseNumber(document.getElementById('step2-amort-2026').value);
+            const amort2027 = parseNumber(document.getElementById('step2-amort-2027').value);
+            
+            let correct = 0;
+            let total = 4;
+            
+            const fields = [
+                { id: 'step2-val-acq', expected: CORRECT_VALUES.step2.valAcq },
+                { id: 'step2-amort-2025', expected: CORRECT_VALUES.step2.amort2025 },
+                { id: 'step2-amort-2026', expected: CORRECT_VALUES.step2.amort2026 },
+                { id: 'step2-amort-2027', expected: CORRECT_VALUES.step2.amort2027 }
+            ];
+            
+            fields.forEach(field => {
+                const el = document.getElementById(field.id);
+                const value = parseNumber(el.value);
+                if (isApproxEqual(value, field.expected, 1)) {
+                    el.classList.add('correct');
+                    el.classList.remove('incorrect');
+                    correct++;
+                } else {
+                    el.classList.add('incorrect');
+                    el.classList.remove('correct');
+                }
+            });
+            
+            const feedback = document.getElementById('feedback-step2');
+            if (correct === total) {
+                feedback.className = 'feedback success';
+                feedback.innerHTML = '🎉 Parfait ! Vous avez bien compris que la valeur d\'acquisition inclut 50% de TVA !';
+                document.getElementById('result-step2').style.display = 'block';
+                document.querySelectorAll('.step-dot')[1].classList.add('completed');
+            } else {
+                feedback.className = 'feedback error';
+                feedback.innerHTML = `⚠️ ${correct}/${total} réponses correctes. Rappel : Valeur d'acquisition = 22.100 € (avec 50% TVA non récup.) !`;
+            }
+        }
+
+        function revealStep2() {
+            document.getElementById('step2-val-acq').value = formatNumber(CORRECT_VALUES.step2.valAcq);
+            document.getElementById('step2-amort-2025').value = formatNumber(CORRECT_VALUES.step2.amort2025);
+            document.getElementById('step2-amort-2026').value = formatNumber(CORRECT_VALUES.step2.amort2026);
+            document.getElementById('step2-amort-2027').value = formatNumber(CORRECT_VALUES.step2.amort2027);
+            document.getElementById('result-step2').style.display = 'block';
+            document.querySelectorAll('.step-dot')[1].classList.add('completed');
+            
+            ['step2-val-acq', 'step2-amort-2025', 'step2-amort-2026', 'step2-amort-2027'].forEach(id => {
+                document.getElementById(id).classList.add('correct');
+                document.getElementById(id).classList.remove('incorrect');
+            });
+        }
+
+        // Étape 3 - Vérification
+        function checkStep3() {
+            const pv = parseNumber(document.getElementById('step3-pv').value);
+            const vcn = parseNumber(document.getElementById('step3-vcn').value);
+            
+            let correct = 0;
+            let total = 2;
+            
+            const pvField = document.getElementById('step3-pv');
+            const vcnField = document.getElementById('step3-vcn');
+            
+            if (isApproxEqual(pv, CORRECT_VALUES.step3.pv)) {
+                pvField.classList.add('correct');
+                pvField.classList.remove('incorrect');
+                correct++;
+            } else {
+                pvField.classList.add('incorrect');
+                pvField.classList.remove('correct');
+            }
+            
+            if (isApproxEqual(vcn, CORRECT_VALUES.step3.vcn, 1)) {
+                vcnField.classList.add('correct');
+                vcnField.classList.remove('incorrect');
+                correct++;
+            } else {
+                vcnField.classList.add('incorrect');
+                vcnField.classList.remove('correct');
+            }
+            
+            const feedback = document.getElementById('feedback-step3');
+            if (correct === total) {
+                feedback.className = 'feedback success';
+                feedback.innerHTML = '🎉 Bravo ! Vous avez bien compris le calcul du résultat !';
+                document.getElementById('result-step3').style.display = 'block';
+                document.querySelectorAll('.step-dot')[2].classList.add('completed');
+            } else {
+                feedback.className = 'feedback error';
+                feedback.innerHTML = `⚠️ ${correct}/${total} réponses correctes. Vérifiez les champs en rouge.`;
+            }
+        }
+
+        function revealStep3() {
+            document.getElementById('step3-pv').value = formatNumber(CORRECT_VALUES.step3.pv);
+            document.getElementById('step3-vcn').value = formatNumber(CORRECT_VALUES.step3.vcn);
+            document.getElementById('result-step3').style.display = 'block';
+            document.querySelectorAll('.step-dot')[2].classList.add('completed');
+            
+            ['step3-pv', 'step3-vcn'].forEach(id => {
+                document.getElementById(id).classList.add('correct');
+                document.getElementById(id).classList.remove('incorrect');
+            });
+        }
+
+        // Journal - Calcul des totaux
+        function calculateTotals() {
+            let totalDebit = 0;
+            let totalCredit = 0;
+            
+            for (let i = 1; i <= 5; i++) {
+                const debit = parseNumber(document.getElementById('j-debit' + i).value);
+                const credit = parseNumber(document.getElementById('j-credit' + i).value);
+                
+                if (!isNaN(debit)) totalDebit += debit;
+                if (!isNaN(credit)) totalCredit += credit;
+            }
+            
+            document.getElementById('total-debit').textContent = formatNumber(totalDebit);
+            document.getElementById('total-credit').textContent = formatNumber(totalCredit);
+        }
+
+        // Journal - Vérification
+        function checkJournal() {
+            calculateTotals();
+            
+            const totalDebit = parseNumber(document.getElementById('total-debit').textContent);
+            const totalCredit = parseNumber(document.getElementById('total-credit').textContent);
+            
+            const feedback = document.getElementById('feedback-journal');
+            
+            if (isApproxEqual(totalDebit, totalCredit, 1) && 
+                isApproxEqual(totalDebit, CORRECT_VALUES.journal.totalDebit, 1)) {
+                feedback.className = 'feedback success';
+                feedback.innerHTML = '🎉 Félicitations ! Votre écriture est équilibrée et correcte ! Consultez la correction pour vérifier les détails.';
+                document.getElementById('correction-journal').style.display = 'block';
+            } else if (isApproxEqual(totalDebit, totalCredit, 1)) {
+                feedback.className = 'feedback error';
+                feedback.innerHTML = '⚠️ Votre écriture est équilibrée mais les montants ne sont pas corrects. Vérifiez vos calculs (TVA à 50%, valeur de 22.100 €).';
+            } else {
+                feedback.className = 'feedback error';
+                feedback.innerHTML = '⚠️ Attention ! Les débits (' + formatNumber(totalDebit) + ' €) ne sont pas égaux aux crédits (' + formatNumber(totalCredit) + ' €).';
+            }
+        }
+
+        function revealJournal() {
+            // Remplir les champs avec la correction
+            document.getElementById('j-compte1').value = '4000';
+            document.getElementById('j-libelle1').value = 'Client';
+            document.getElementById('j-debit1').value = '16575';
+            document.getElementById('j-credit1').value = '';
+            
+            document.getElementById('j-compte2').value = '4510';
+            document.getElementById('j-libelle2').value = 'TVA à payer (21%×50%)';
+            document.getElementById('j-debit2').value = '';
+            document.getElementById('j-credit2').value = '1575';
+            
+            document.getElementById('j-compte3').value = '2410';
+            document.getElementById('j-libelle3').value = 'Voiture (+50% TVA)';
+            document.getElementById('j-debit3').value = '';
+            document.getElementById('j-credit3').value = '22100';
+            
+            document.getElementById('j-compte4').value = '2419';
+            document.getElementById('j-libelle4').value = 'Amort. actés s/voiture';
+            document.getElementById('j-debit4').value = '16105.75';
+            document.getElementById('j-credit4').value = '';
+            
+            document.getElementById('j-compte5').value = '7630';
+            document.getElementById('j-libelle5').value = 'Plus-value de réalisation';
+            document.getElementById('j-debit5').value = '';
+            document.getElementById('j-credit5').value = '9005.75';
+            
+            calculateTotals();
+            document.getElementById('correction-journal').style.display = 'block';
+        }
+
+        // Event listeners for input fields
+        document.querySelectorAll('.journal-table input').forEach(input => {
+            input.addEventListener('input', calculateTotals);
+        });
     </script>
 </body>
 </html>
